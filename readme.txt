@@ -1,4 +1,6 @@
-===  WP file_get_contents() ===
+=== WP file_get_contents() ===
+Plugin Name: WP file_get_contents()
+Plugin Splug: wp-file-get-contents
 Contributors: jsmoriss
 Tags: file_get_contents, shortcode, include, file, url, body, content
 License: GPLv3

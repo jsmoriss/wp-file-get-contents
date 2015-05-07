@@ -1,6 +1,7 @@
 <h1>WP file_get_contents()</h1>
 
 <table>
+<tr><th align="right" valign="top" nowrap>Plugin Name</th><td>WP file_get_contents()</td></tr>
 <tr><th align="right" valign="top" nowrap>Summary</th><td>A WordPress shortcode for PHP&#039;s file_get_contents() function.</td></tr>
 <tr><th align="right" valign="top" nowrap>Stable Version</th><td>1.1</td></tr>
 <tr><th align="right" valign="top" nowrap>Requires At Least</th><td>WordPress 3.0</td></tr>
