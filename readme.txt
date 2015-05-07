@@ -31,7 +31,7 @@ Shortcode attributes:
 
 * url = http, https, or file URI.
 * file = path to a local file (relative to the `wp-content/` folder).
-* cache = number of seconds to cache the content in the transient cache (defaults to 300 seconds).
+* cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).
 * pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.
 * class = wrap the content in the specified div class.
 * filter = apply the specified filter to the content.

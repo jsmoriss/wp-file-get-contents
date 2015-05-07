@@ -32,7 +32,7 @@
 <ul>
 <li>url = http, https, or file URI.</li>
 <li>file = path to a local file (relative to the <code>wp-content/</code> folder).</li>
-<li>cache = number of seconds to cache the content in the transient cache (defaults to 300 seconds).</li>
+<li>cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).</li>
 <li>pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.</li>
 <li>class = wrap the content in the specified div class.</li>
 <li>filter = apply the specified filter to the content.</li>
