@@ -6,7 +6,7 @@ Tags: file_get_contents, shortcode, include, file, url, body, content
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.txt
 Requires At Least: 3.0
-Tested Up To: 4.2.3
+Tested Up To: 4.2.4
 Stable Tag: 1.1
 
 A WordPress shortcode for PHP's file_get_contents() function.
