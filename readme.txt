@@ -68,6 +68,8 @@ Shortcode attributes:
 	* *None*
 * **Bugfixes**
 	* *None*
+* **Developer Notes**
+	* *None*
 
 == Upgrade Notice ==
 
