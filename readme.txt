@@ -1,5 +1,5 @@
-=== WP file_get_contents() ===
-Plugin Name: WP file_get_contents()
+=== JSM's file_get_contents() Shortcode ===
+Plugin Name: JSM's file_get_contents() Shortcode
 Plugin Splug: wp-file-get-contents
 Contributors: jsmoriss
 Tags: file_get_contents, shortcode, include, file, url, body, content
@@ -27,7 +27,9 @@ Examples:
 [wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="3600"]
 `
 
-<strong>Note that all local file paths are relative to the `wp-contents/` folder</strong>. You cannot include files outside of the `wp-contents/` folder. As an example, `file://dir/file.html` and/or `/dir/file.html` will be interpreted as `wordpress/wp-contents/dir/file.html`. The `..` folder name is also removed from file paths to prevent backing out of the `wp-content/` folder.
+<strong>Note that all local file paths are relative to the `wp-contents/` folder</strong>.
+
+You cannot include files outside of the `wp-contents/` folder. As an example, `file://dir/file.html` and/or `/dir/file.html` will be interpreted as `wordpress/wp-contents/dir/file.html`. The `..` folder name is also removed from file paths to prevent backing out of the `wp-content/` folder.
 
 Shortcode attributes:
 
@@ -40,21 +42,27 @@ Shortcode attributes:
 
 == Installation ==
 
-*Using the WordPress Dashboard*
+*Automated Install*
 
-1. Login to your weblog
-1. Go to Plugins
-1. Select Add New
-1. Search for *Get URL*
-1. Select Install
-1. Select Install Now
-1. Select Activate Plugin
+1. Go to the wp-admin/ section of your website
+1. Select the *Plugins* menu item
+1. Select the *Add New* sub-menu item
+1. In the *Search* box, enter the plugin name
+1. Click the *Search Plugins* button
+1. Click the *Install Now* link for the plugin
+1. Click the *Activate Plugin* link
 
-*Manual*
+*Semi-Automated Install*
 
-1. Download and unzip the plugin
-1. Transfer the entire `wp-file-get-contents/` folder to the web server's `wp-content/plugins/` folder
-1. Activate the plugin through the Plugins menu in WordPress
+1. Download the plugin archive file
+1. Go to the wp-admin/ section of your website
+1. Select the *Plugins* menu item
+1. Select the *Add New* sub-menu item
+1. Click on *Upload* link (just under the Install Plugins page title)
+1. Click the *Browse...* button
+1. Navigate your local folders / directories and choose the zip file you downloaded previously
+1. Click on the *Install Now* button
+1. Click the *Activate Plugin* link
 
 == Frequently Asked Questions ==
 

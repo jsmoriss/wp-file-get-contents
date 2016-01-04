@@ -1,16 +1,17 @@
 <?php
 /**
- * Plugin Name: WP file_get_contents()
- * Plugin URI: http://surniaulula.com/extend/plugins/get-url/
+ * Plugin Name: JSM's file_get_contents() Shortcode
+ * Plugin URI: http://surniaulula.com/extend/plugins/wp-file-get-contents/
  * Author: Jean-Sebastien Morisset
  * Author URI: http://surniaulula.com/
  * License: GPLv3
  * License URI: http://www.gnu.org/licenses/gpl.txt
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires At Least: 3.0
+ * Tested Up To: 4.4
  * Version: 1.1
  * 
- * Copyright 2012-2014 - Jean-Sebastien Morisset - http://surniaulula.com/
+ * Copyright 2012-2016 Jean-Sebastien Morisset (http://surniaulula.com/)
  */
 
 

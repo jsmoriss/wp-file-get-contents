@@ -1,7 +1,7 @@
-<h1>WP file_get_contents()</h1>
+<h1>JSM&#039;s file_get_contents() Shortcode</h1>
 
 <table>
-<tr><th align="right" valign="top" nowrap>Plugin Name</th><td>WP file_get_contents()</td></tr>
+<tr><th align="right" valign="top" nowrap>Plugin Name</th><td>JSM&#039;s file_get_contents() Shortcode</td></tr>
 <tr><th align="right" valign="top" nowrap>Summary</th><td>A WordPress shortcode for PHP&#039;s file_get_contents() function.</td></tr>
 <tr><th align="right" valign="top" nowrap>Stable Version</th><td>1.1</td></tr>
 <tr><th align="right" valign="top" nowrap>Requires At Least</th><td>WordPress 3.0</td></tr>
@@ -26,7 +26,9 @@
 [wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="3600"]
 </code></pre>
 
-<p><strong>Note that all local file paths are relative to the <code>wp-contents/</code> folder</strong>. You cannot include files outside of the <code>wp-contents/</code> folder. As an example, <code>file://dir/file.html</code> and/or <code>/dir/file.html</code> will be interpreted as <code>wordpress/wp-contents/dir/file.html</code>. The <code>..</code> folder name is also removed from file paths to prevent backing out of the <code>wp-content/</code> folder.</p>
+<p><strong>Note that all local file paths are relative to the <code>wp-contents/</code> folder</strong>.</p>
+
+<p>You cannot include files outside of the <code>wp-contents/</code> folder. As an example, <code>file://dir/file.html</code> and/or <code>/dir/file.html</code> will be interpreted as <code>wordpress/wp-contents/dir/file.html</code>. The <code>..</code> folder name is also removed from file paths to prevent backing out of the <code>wp-content/</code> folder.</p>
 
 <p>Shortcode attributes:</p>
 
@@ -42,24 +44,30 @@
 
 <h2>Installation</h2>
 
-<p><em>Using the WordPress Dashboard</em></p>
+<p><em>Automated Install</em></p>
 
 <ol>
-<li>Login to your weblog</li>
-<li>Go to Plugins</li>
-<li>Select Add New</li>
-<li>Search for <em>Get URL</em></li>
-<li>Select Install</li>
-<li>Select Install Now</li>
-<li>Select Activate Plugin</li>
+<li>Go to the wp-admin/ section of your website</li>
+<li>Select the <em>Plugins</em> menu item</li>
+<li>Select the <em>Add New</em> sub-menu item</li>
+<li>In the <em>Search</em> box, enter the plugin name</li>
+<li>Click the <em>Search Plugins</em> button</li>
+<li>Click the <em>Install Now</em> link for the plugin</li>
+<li>Click the <em>Activate Plugin</em> link</li>
 </ol>
 
-<p><em>Manual</em></p>
+<p><em>Semi-Automated Install</em></p>
 
 <ol>
-<li>Download and unzip the plugin</li>
-<li>Transfer the entire <code>wp-file-get-contents/</code> folder to the web server's <code>wp-content/plugins/</code> folder</li>
-<li>Activate the plugin through the Plugins menu in WordPress</li>
+<li>Download the plugin archive file</li>
+<li>Go to the wp-admin/ section of your website</li>
+<li>Select the <em>Plugins</em> menu item</li>
+<li>Select the <em>Add New</em> sub-menu item</li>
+<li>Click on <em>Upload</em> link (just under the Install Plugins page title)</li>
+<li>Click the <em>Browse...</em> button</li>
+<li>Navigate your local folders / directories and choose the zip file you downloaded previously</li>
+<li>Click on the <em>Install Now</em> button</li>
+<li>Click the <em>Activate Plugin</em> link</li>
 </ol>
 
 
