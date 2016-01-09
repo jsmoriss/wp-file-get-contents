@@ -7,7 +7,7 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.txt
 Requires At Least: 3.0
 Tested Up To: 4.4
-Stable Tag: 1.1
+Stable Tag: 1.1.1
 
 A WordPress shortcode for PHP's file_get_contents() function.
 
