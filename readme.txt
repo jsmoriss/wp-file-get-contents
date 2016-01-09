@@ -68,6 +68,17 @@ Shortcode attributes:
 
 == Changelog ==
 
+= Version 1.1.1 (2016/01/08) =
+
+* **New Features**
+	* *None*
+* **Improvements**
+	* Updated the plugin name and assets (icons and banner).
+* **Bugfixes**
+	* *None*
+* **Developer Notes**
+	* *None*
+
 = Version 1.1 (2015/05/07) =
 
 * **New Features**
@@ -81,7 +92,7 @@ Shortcode attributes:
 
 == Upgrade Notice ==
 
-= 1.1 =
+= 1.1.1 =
 
-Added new 'pre', 'class', and 'filter' shortcode attributes.
+2016/01/08 - Updated the plugin name and assets (icons and banner).
 

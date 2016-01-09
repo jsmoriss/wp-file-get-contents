@@ -9,7 +9,7 @@
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires At Least: 3.0
  * Tested Up To: 4.4
- * Version: 1.1
+ * Version: 1.1.1
  * 
  * Copyright 2012-2016 Jean-Sebastien Morisset (http://surniaulula.com/)
  */
