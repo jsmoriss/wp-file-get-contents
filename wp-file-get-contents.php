@@ -22,9 +22,8 @@ if ( ! class_exists( 'wpfgc' ) ) {
 
 	class wpfgc {
 
-		private $sc_name = 'wp-file-get-contents';
-
 		protected static $instance = null;
+		protected static $sc_name = 'wp-file-get-contents';
 
 		public static function &get_instance() {
 			if ( self::$instance === null )
@@ -34,9 +33,8 @@ if ( ! class_exists( 'wpfgc' ) ) {
 
 		public function __construct() {
 			// allow for a custom shortcode name
-			if ( defined( 'WPFGC_SHORTCODE_NAME' ) &&
-				! empty( WPFGC_SHORTCODE_NAME ) )
-					$this->sc_name = WPFGC_SHORTCODE_NAME;
+			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME )
+				self::$sc_name = WPFGC_SHORTCODE_NAME;
 
 			if ( ! is_admin() ) {
 				$this->wpautop();
@@ -58,11 +56,11 @@ if ( ! class_exists( 'wpfgc' ) ) {
 		}
 
 		public function add_shortcode() {
-        		add_shortcode( $this->sc_name, array( &$this, 'do_shortcode' ) );
+        		add_shortcode( self::$sc_name, array( &$this, 'do_shortcode' ) );
 		}
 
 		public function remove_shortcode() {
-			remove_shortcode( $this->sc_name );
+			remove_shortcode( self::$sc_name );
 		}
 
 		public function do_shortcode( $atts, $content = null ) { 
