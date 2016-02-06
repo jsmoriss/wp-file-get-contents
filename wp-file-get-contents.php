@@ -8,8 +8,8 @@
  * License URI: http://www.gnu.org/licenses/gpl.txt
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires At Least: 3.0
- * Tested Up To: 4.4
- * Version: 1.1.1
+ * Tested Up To: 4.4.2
+ * Version: 1.2.0
  * 
  * Copyright 2012-2016 Jean-Sebastien Morisset (http://surniaulula.com/)
  */
@@ -18,16 +18,29 @@
 if ( ! defined( 'ABSPATH' ) ) 
 	die( 'These aren\'t the droids you\'re looking for...' );
 
-if ( ! class_exists( 'wp_file_get_contents' ) ) {
+if ( ! class_exists( 'wpfgc' ) ) {
 
-	class wp_file_get_contents {
+	class wpfgc {
 
-		private $shortcode_tag = 'wp-file-get-contents';
+		private $sc_name = 'wp-file-get-contents';
+
+		protected static $instance = null;
+
+		public static function &get_instance() {
+			if ( self::$instance === null )
+				self::$instance = new self;
+			return self::$instance;
+		}
 
 		public function __construct() {
+			// allow for a custom shortcode name
+			if ( defined( 'WPFGC_SHORTCODE_NAME' ) &&
+				! empty( WPFGC_SHORTCODE_NAME ) )
+					$this->sc_name = WPFGC_SHORTCODE_NAME;
+
 			if ( ! is_admin() ) {
 				$this->wpautop();
-				$this->add();
+				$this->add_shortcode();
 			}
 		}
 
@@ -44,15 +57,15 @@ if ( ! class_exists( 'wp_file_get_contents' ) ) {
 			}
 		}
 
-		public function add() {
-        		add_shortcode( $this->shortcode_tag, array( &$this, 'shortcode' ) );
+		public function add_shortcode() {
+        		add_shortcode( $this->sc_name, array( &$this, 'do_shortcode' ) );
 		}
 
-		public function remove() {
-			remove_shortcode( $this->shortcode_tag );
+		public function remove_shortcode() {
+			remove_shortcode( $this->sc_name );
 		}
 
-		public function shortcode( $atts, $content = null ) { 
+		public function do_shortcode( $atts, $content = null ) { 
 			$pre = array_key_exists( 'pre', $atts ) && ! empty( $atts['pre'] ) ? true : false;
 			$add_class = array_key_exists( 'class', $atts ) ? ' '.$atts['class'] : '';
 			$more_link = array_key_exists( 'more', $atts ) ? $atts['more'] : true;
@@ -96,17 +109,17 @@ if ( ! class_exists( 'wp_file_get_contents' ) ) {
 				( $pre ? "<pre>\n" : '' ).$content.( $pre ? "</pre>\n" : '' ).'</div>'."\n";
 
 			if ( ! empty( $apply_filter ) ) {
-				$this->remove();	// prevent recursion
+				$this->remove_shortcode();	// prevent recursion
 				$content = apply_filters( $apply_filter, $content );
-				$this->add();
+				$this->add_shortcode();
 			}
 
 			return $content;
 		}
 	}
 
-        global $wp_file_get_contents;
-        $wp_file_get_contents = new wp_file_get_contents();
+        global $wpfgc;
+        $wpfgc = wpfgc::get_instance();
 }
 
 ?>

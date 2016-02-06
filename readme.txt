@@ -31,6 +31,8 @@ Examples:
 
 You cannot include files outside of the `wp-contents/` folder. As an example, `file://dir/file.html` and/or `/dir/file.html` will be interpreted as `wordpress/wp-contents/dir/file.html`. The `..` folder name is also removed from file paths to prevent backing out of the `wp-content/` folder.
 
+The WPFGC_SHORTCODE_NAME constant can be defined to change the default shortcode name.
+
 Shortcode attributes:
 
 * url = http, https, or file URI.
@@ -68,23 +70,12 @@ Shortcode attributes:
 
 == Changelog ==
 
-= Version 1.1.1 (2016/01/08) =
+= Version 1.2.0 (2016/02/06) =
 
 * **New Features**
 	* *None*
 * **Improvements**
-	* Updated the plugin name and assets (icons and banner).
-* **Bugfixes**
-	* *None*
-* **Developer Notes**
-	* *None*
-
-= Version 1.1 (2015/05/07) =
-
-* **New Features**
-	* Added new 'pre', 'class', and 'filter' shortcode attributes.
-* **Improvements**
-	* *None*
+	* Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
 * **Bugfixes**
 	* *None*
 * **Developer Notes**
@@ -92,7 +83,7 @@ Shortcode attributes:
 
 == Upgrade Notice ==
 
-= 1.1.1 =
+= 1.2.0 =
 
-2016/01/08 - Updated the plugin name and assets (icons and banner).
+2016/02/06 - Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
 
