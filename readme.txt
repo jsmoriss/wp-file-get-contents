@@ -1,7 +1,7 @@
 === JSM's file_get_contents() Shortcode ===
 Plugin Name: JSM's file_get_contents() Shortcode
 Plugin Splug: wp-file-get-contents
-Contributors: JS Morisset
+Contributors: jsmoriss
 Tags: file_get_contents, shortcode, include, file, url, body, content
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.txt
