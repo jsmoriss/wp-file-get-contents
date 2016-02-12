@@ -68,18 +68,37 @@ Shortcode attributes:
 
 == Frequently Asked Questions ==
 
+= Frequently Asked Questions =
+
+* None
+
+== Other Notes ==
+
+= Additional Documentation =
+
+* None
+
+== Screenshots ==
+
 == Changelog ==
 
-= Version 1.2.0 (2016/02/06) =
+= Repositories =
 
-* **New Features**
-	* *None*
-* **Improvements**
+* [GitHub](https://github.com/jsmoriss/wp-file-get-contents)
+* [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
+
+= Changelog / Release Notes =
+
+**Version 1.2.0 (2016/02/06)**
+
+* *New Features*
+	* None
+* *Improvements*
 	* Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
-* **Bugfixes**
-	* *None*
-* **Developer Notes**
-	* *None*
+* *Bugfixes*
+	* None
+* *Developer Notes*
+	* None
 
 == Upgrade Notice ==
 
