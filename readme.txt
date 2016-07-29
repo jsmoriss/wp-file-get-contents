@@ -104,5 +104,5 @@ Shortcode attributes:
 
 = 1.2.0 =
 
-2016/02/06 - Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
+(2016/02/06) Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
 
