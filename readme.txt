@@ -17,7 +17,7 @@ A WordPress shortcode for PHP's file_get_contents() function.
 
 Examples:
 
-`
+<pre>
 [wp-file-get-contents url="http://example.com/dir/file.html"]
 
 [wp-file-get-contents url="http://example.com/counter/" cache="0"]
@@ -25,7 +25,7 @@ Examples:
 [wp-file-get-contents url="file://dir/file.html"]
 
 [wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="3600"]
-`
+</pre>
 
 <strong>Note that all local file paths are relative to the `wp-contents/` folder</strong>.
 
