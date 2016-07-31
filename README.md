@@ -18,13 +18,13 @@
 <p>Examples:</p>
 
 <pre>
-[wp-file-get-contents url="http://example.com/dir/file.html"]
+&#91;wp-file-get-contents url="http://example.com/dir/file.html"&#93;
 
-[wp-file-get-contents url="http://example.com/counter/" cache="0"]
+&#91;wp-file-get-contents url="http://example.com/counter/" cache="0"&#93;
 
-[wp-file-get-contents url="file://dir/file.html"]
+&#91;wp-file-get-contents url="file://dir/file.html"&#93;
 
-[wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="3600"]
+&#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="3600"&#93;
 </pre>
 
 <p><strong>Note that all local file paths are relative to the <code>wp-contents/</code> folder</strong>.</p>
