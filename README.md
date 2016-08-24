@@ -15,7 +15,7 @@
 
 <p>A WordPress shortcode for PHP's file_get_contents() function.</p>
 
-<p>Shortcode attributes:</p>
+<h4>Shortcode Attributes</h4>
 
 <ul>
 <li>url = http, https, or file URI.</li>
@@ -28,13 +28,15 @@
 
 <p>All file paths are relative to the <code>wp-contents/</code> folder &mdash; you cannot include files outside of the <code>wp-contents/</code> folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are read as <code>wordpress/wp-contents/dir/file.html</code>. The <code>..</code> folder name is removed from file paths to prevent backing out of the <code>wp-content/</code> folder.</p>
 
+<h4>Shortcode Name</h4>
+
 <p>The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').</p>
 
 <pre>
 define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 </pre>
 
-<p>Shortcode examples:</p>
+<h4>Shortcode Examples</h4>
 
 <pre>
 &#91;wp-file-get-contents url="http://example.com/dir/file.html"&#93;
