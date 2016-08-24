@@ -22,13 +22,13 @@ A WordPress shortcode for PHP's file_get_contents() function.
 = Shortcode Attributes =
 
 * url = http, https, or file URI.
-* file = path to a local file (relative to the `wp-content/` folder).
+* file = path to a local file (relative to the wp-content/ folder).
 * cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).
 * pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.
 * class = wrap the content in the specified div class.
 * filter = apply the specified filter to the content.
 
-All file paths are relative to the `wp-contents/` folder &mdash; you cannot include files outside of the `wp-contents/` folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are read as `wordpress/wp-contents/dir/file.html`. The `..` folder name is removed from file paths to prevent backing out of the `wp-content/` folder.
+All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are read as wordpress/wp-contents/dir/file.html. The `..` folder name is removed from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
