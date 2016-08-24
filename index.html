@@ -49,14 +49,14 @@
 
 <ul>
 <li>url = http, https, or file URI.</li>
-<li>file = path to a local file (relative to the <code>wp-content/</code> folder).</li>
+<li>file = path to a local file (relative to the wp-content/ folder).</li>
 <li>cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).</li>
 <li>pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.</li>
 <li>class = wrap the content in the specified div class.</li>
 <li>filter = apply the specified filter to the content.</li>
 </ul>
 
-<p>All file paths are relative to the <code>wp-contents/</code> folder &mdash; you cannot include files outside of the <code>wp-contents/</code> folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are read as <code>wordpress/wp-contents/dir/file.html</code>. The <code>..</code> folder name is removed from file paths to prevent backing out of the <code>wp-content/</code> folder.</p>
+<p>All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is removed from file paths to prevent backing out of the wp-content/ folder.</p>
 
 <h4>Shortcode Name</h4>
 
