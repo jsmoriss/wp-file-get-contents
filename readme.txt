@@ -28,6 +28,14 @@ Shortcode attributes:
 * class = wrap the content in the specified div class.
 * filter = apply the specified filter to the content.
 
+All file paths are relative to the `wp-contents/` folder &mdash; you cannot include files outside of the `wp-contents/` folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are read as `wordpress/wp-contents/dir/file.html`. The `..` folder name is removed from file paths to prevent backing out of the `wp-content/` folder.
+
+The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').
+
+<pre>
+define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
+</pre>
+
 Shortcode examples:
 
 <pre>
@@ -35,14 +43,6 @@ Shortcode examples:
 &#91;wp-file-get-contents url="http://example.com/counter/" cache="7200"&#93;
 &#91;wp-file-get-contents url="file://dir/file.html"&#93;
 &#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
-</pre>
-
-All file paths are relative to the `wp-contents/` folder &mdash; you cannot include files outside of the `wp-contents/` folder. As an example, `file://dir/file.html` and/or `/dir/file.html` will be read as `wordpress/wp-contents/dir/file.html`. The `..` folder name is removed from file paths to prevent backing out of the `wp-content/` folder.
-
-The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').
-
-<pre>
-define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 </pre>
 
 == Installation ==
