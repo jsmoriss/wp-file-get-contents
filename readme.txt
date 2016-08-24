@@ -11,7 +11,7 @@ Tags: file_get_contents, shortcode, include, file, url, body, content
 Contributors: jsmoriss
 Requires At Least: 3.0
 Tested Up To: 4.6
-Stable Tag: 1.2.0
+Stable Tag: 1.3.0-1
 
 A WordPress shortcode for PHP's file_get_contents() function.
 
