@@ -105,8 +105,6 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 * *Developer Notes*
 	* None
 
-== Upgrade Notice ==
-
 **Version 1.2.0 (2016/02/06)**
 
 * *New Features*
