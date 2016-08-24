@@ -19,15 +19,21 @@ A WordPress shortcode for PHP's file_get_contents() function.
 
 A WordPress shortcode for PHP's file_get_contents() function.
 
-Examples:
+Shortcode attributes:
+
+* url = http, https, or file URI.
+* file = path to a local file (relative to the `wp-content/` folder).
+* cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).
+* pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.
+* class = wrap the content in the specified div class.
+* filter = apply the specified filter to the content.
+
+Shortcode examples:
 
 <pre>
 &#91;wp-file-get-contents url="http://example.com/dir/file.html"&#93;
-
 &#91;wp-file-get-contents url="http://example.com/counter/" cache="7200"&#93;
-
 &#91;wp-file-get-contents url="file://dir/file.html"&#93;
-
 &#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
 </pre>
 
@@ -38,15 +44,6 @@ The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to c
 <pre>
 define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 </pre>
-
-Shortcode attributes:
-
-* url = http, https, or file URI.
-* file = path to a local file (relative to the `wp-content/` folder).
-* cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).
-* pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.
-* class = wrap the content in the specified div class.
-* filter = apply the specified filter to the content.
 
 == Installation ==
 
