@@ -20,18 +20,20 @@
 <pre>
 &#91;wp-file-get-contents url="http://example.com/dir/file.html"&#93;
 
-&#91;wp-file-get-contents url="http://example.com/counter/" cache="0"&#93;
+&#91;wp-file-get-contents url="http://example.com/counter/" cache="7200"&#93;
 
 &#91;wp-file-get-contents url="file://dir/file.html"&#93;
 
-&#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="3600"&#93;
+&#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
 </pre>
 
-<p><strong>Note that all local file paths are relative to the <code>wp-contents/</code> folder</strong>.</p>
+<p>All file paths are relative to the <code>wp-contents/</code> folder &mdash; you cannot include files outside of the <code>wp-contents/</code> folder. As an example, <code>file://dir/file.html</code> and/or <code>/dir/file.html</code> will be read as <code>wordpress/wp-contents/dir/file.html</code>. The <code>..</code> folder name is removed from file paths to prevent backing out of the <code>wp-content/</code> folder.</p>
 
-<p>You cannot include files outside of the <code>wp-contents/</code> folder. As an example, <code>file://dir/file.html</code> and/or <code>/dir/file.html</code> will be interpreted as <code>wordpress/wp-contents/dir/file.html</code>. The <code>..</code> folder name is also removed from file paths to prevent backing out of the <code>wp-content/</code> folder.</p>
+<p>The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').</p>
 
-<p>The WPFGC_SHORTCODE_NAME constant can be defined to change the default shortcode name.</p>
+<pre>
+define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
+</pre>
 
 <p>Shortcode attributes:</p>
 
