@@ -93,6 +93,19 @@ Shortcode attributes:
 
 = Changelog / Release Notes =
 
+**Version 1.3.0-1 (2016/08/24)**
+
+* *New Features*
+	* None
+* *Improvements*
+	* Added a `save_post()` action to clear the cached content.
+* *Bugfixes*
+	* None
+* *Developer Notes*
+	* None
+
+== Upgrade Notice ==
+
 **Version 1.2.0 (2016/02/06)**
 
 * *New Features*
@@ -106,7 +119,7 @@ Shortcode attributes:
 
 == Upgrade Notice ==
 
-= 1.2.0 =
+= 1.3.0-1 =
 
-(2016/02/06) Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
+(2016/08/24) Added a save_post() action to clear the cached content.
 
