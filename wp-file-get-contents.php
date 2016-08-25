@@ -136,7 +136,9 @@ if ( ! class_exists( 'wpfgc' ) ) {
 				case 'publish':
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 					$is_admin = is_admin();
-					if ( ! empty( $post_obj->post_content ) ) {
+					if ( isset( $post_obj->post_content ) &&
+						strpos( $post_obj->post_content, '['.self::$wpfgc_name ) ) {
+
 						if ( $is_admin )
 							$this->add_shortcode();
 						self::$clear_cache = true;	// clear cache and return
