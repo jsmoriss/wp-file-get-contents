@@ -9,7 +9,7 @@ Donate Link:
 Assets URI: https://jsmoriss.github.io/wp-file-get-contents/assets/
 Tags: file_get_contents, shortcode, include, file, url, body, content
 Contributors: jsmoriss
-Requires At Least: 3.0
+Requires At Least: 3.5
 Tested Up To: 4.6.1
 Stable Tag: 1.3.0-1
 
