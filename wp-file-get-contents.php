@@ -12,7 +12,7 @@
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires At Least: 3.5
  * Tested Up To: 4.6.1
- * Version: 1.3.0-1
+ * Version: 1.4.0-1
  * 
  * Copyright 2012-2016 Jean-Sebastien Morisset (http://surniaulula.com/)
  */
@@ -68,11 +68,12 @@ if ( ! class_exists( 'wpfgc' ) ) {
 
 		public function do_shortcode( $atts, $content = null ) { 
 
-			$pre = empty( $atts['pre'] ) ? false : true;				// wrap content in pre tags
-			$add_class = empty( $atts['class'] ) ? '' : ' '.$atts['class'];		// optional css class names
-			$more_link = empty( $atts['more'] ) ? true : $atts['more'];		// add more link (default is true)
-			$filter_name = empty( $atts['filter'] ) ? false : $atts['filter'];	// optional content filter
-			$cache_expire = isset( $atts['cache'] ) ? $atts['cache'] : 3600;	// allow for 0 seconds (default 1 hour)
+			$cache_expire = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;		// allow for 0 seconds (default 1 hour)
+			$add_pre = isset( $atts['pre'] ) ? self::get_bool( $atts['pre'] ) : false;	// wrap content in pre tags (default is false)
+			$add_class = empty( $atts['class'] ) ? '' : ' '.$atts['class'];			// optional css class names
+			$do_filter = isset( $atts['filter'] ) ? $atts['filter'] : false;		// optional content filter
+			$more_link = isset( $atts['more'] ) ? self::get_bool( $atts['more'] ) : true;	// add more link (default is true)
+			$body_only = isset( $atts['body'] ) ? self::get_bool( $atts['body'] ) : true;	// keep only <body></body> content
 
 			// determine the url / filename to retrieve
 			if ( ! empty( $atts['url'] ) && 
@@ -101,6 +102,9 @@ if ( ! class_exists( 'wpfgc' ) ) {
 			if ( $content === false )
 				$content = file_get_contents( $url );
 			else return $content;	// content from cache
+		
+			if ( $body_only && stripos( $content, '<body' ) !== false )
+				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 
 			if ( $more_link && ! is_singular() ) {
 				global $post;
@@ -113,11 +117,11 @@ if ( ! class_exists( 'wpfgc' ) ) {
 			}
 
 			$content = '<div class="wp_file_get_contents'.$add_class.'">'."\n".
-				( $pre ? "<pre>\n" : '' ).$content.( $pre ? "</pre>\n" : '' ).'</div>'."\n";
+				( $add_pre ? "<pre>\n" : '' ).$content.( $add_pre ? "</pre>\n" : '' ).'</div>'."\n";
 
-			if ( ! empty( $filter_name ) ) {
+			if ( $do_filter ) {
 				$this->remove_shortcode();	// prevent recursion
-				$content = apply_filters( $filter_name, $content );
+				$content = apply_filters( $do_filter, $content );
 				$this->add_shortcode();
 			}
 
@@ -137,7 +141,7 @@ if ( ! class_exists( 'wpfgc' ) ) {
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 					$is_admin = is_admin();
 					if ( isset( $post_obj->post_content ) &&
-						strpos( $post_obj->post_content, '['.self::$wpfgc_name ) ) {
+						stripos( $post_obj->post_content, '['.self::$wpfgc_name ) !== false ) {
 
 						if ( $is_admin )
 							$this->add_shortcode();
@@ -149,6 +153,12 @@ if ( ! class_exists( 'wpfgc' ) ) {
 					break;
 			}
 			return $post_id;
+		}
+
+		// converts string to boolean
+		public static function get_bool( $mixed ) {
+			return is_string( $mixed ) ? 
+				filter_var( $mixed, FILTER_VALIDATE_BOOLEAN ) : (bool) $mixed;
 		}
 	}
 
