@@ -20,10 +20,12 @@
 <ul>
 <li>url = http, https, or file URI.</li>
 <li>file = path to a local file (relative to the wp-content/ folder).</li>
-<li>cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).</li>
-<li>pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.</li>
-<li>class = wrap the content in the specified div class.</li>
-<li>filter = apply the specified filter to the content.</li>
+<li>cache = number of seconds to cache the content in the transient cache (defaults is 3600 seconds).</li>
+<li>pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).</li>
+<li>class = wrap the content in the specified div class (default is none).</li>
+<li>filter = apply the specified filter to the content (default is none).</li>
+<li>more = add more link on non-singular web pages (default is true).</li>
+<li>body = keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).</li>
 </ul>
 
 <p>All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is removed from file paths to prevent backing out of the wp-content/ folder.</p>
@@ -51,27 +53,27 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 <h4>Automated Install</h4>
 
 <ol>
-<li>Go to the wp-admin/ section of your website</li>
-<li>Select the <em>Plugins</em> menu item</li>
-<li>Select the <em>Add New</em> sub-menu item</li>
-<li>In the <em>Search</em> box, enter the plugin name</li>
-<li>Click the <em>Search Plugins</em> button</li>
-<li>Click the <em>Install Now</em> link for the plugin</li>
-<li>Click the <em>Activate Plugin</em> link</li>
+<li>Go to the wp-admin/ section of your website.</li>
+<li>Select the <em>Plugins</em> menu item.</li>
+<li>Select the <em>Add New</em> sub-menu item.</li>
+<li>In the <em>Search</em> box, enter the plugin name.</li>
+<li>Click the <em>Search Plugins</em> button.</li>
+<li>Click the <em>Install Now</em> link for the plugin.</li>
+<li>Click the <em>Activate Plugin</em> link.</li>
 </ol>
 
 <h4>Semi-Automated Install</h4>
 
 <ol>
-<li>Download the plugin archive file</li>
-<li>Go to the wp-admin/ section of your website</li>
-<li>Select the <em>Plugins</em> menu item</li>
-<li>Select the <em>Add New</em> sub-menu item</li>
-<li>Click on <em>Upload</em> link (just under the Install Plugins page title)</li>
-<li>Click the <em>Browse...</em> button</li>
-<li>Navigate your local folders / directories and choose the zip file you downloaded previously</li>
-<li>Click on the <em>Install Now</em> button</li>
-<li>Click the <em>Activate Plugin</em> link</li>
+<li>Download the plugin archive file.</li>
+<li>Go to the wp-admin/ section of your website.</li>
+<li>Select the <em>Plugins</em> menu item.</li>
+<li>Select the <em>Add New</em> sub-menu item.</li>
+<li>Click on <em>Upload</em> link (just under the Install Plugins page title).</li>
+<li>Click the <em>Browse...</em> button.</li>
+<li>Navigate your local folders / directories and choose the zip file you downloaded previously.</li>
+<li>Click on the <em>Install Now</em> button.</li>
+<li>Click the <em>Activate Plugin</em> link.</li>
 </ol>
 
 

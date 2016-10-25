@@ -23,10 +23,12 @@ A WordPress shortcode for PHP's file_get_contents() function.
 
 * url = http, https, or file URI.
 * file = path to a local file (relative to the wp-content/ folder).
-* cache = number of seconds to cache the content in the transient cache (defaults to 3600 seconds).
-* pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags.
-* class = wrap the content in the specified div class.
-* filter = apply the specified filter to the content.
+* cache = number of seconds to cache the content in the transient cache (defaults is 3600 seconds).
+* pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
+* class = wrap the content in the specified div class (default is none).
+* filter = apply the specified filter to the content (default is none).
+* more = add more link on non-singular web pages (default is true).
+* body = keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 
 All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are read as wordpress/wp-contents/dir/file.html. The `..` folder name is removed from file paths to prevent backing out of the wp-content/ folder.
 
@@ -51,25 +53,25 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 
 = Automated Install =
 
-1. Go to the wp-admin/ section of your website
-1. Select the *Plugins* menu item
-1. Select the *Add New* sub-menu item
-1. In the *Search* box, enter the plugin name
-1. Click the *Search Plugins* button
-1. Click the *Install Now* link for the plugin
-1. Click the *Activate Plugin* link
+1. Go to the wp-admin/ section of your website.
+1. Select the *Plugins* menu item.
+1. Select the *Add New* sub-menu item.
+1. In the *Search* box, enter the plugin name.
+1. Click the *Search Plugins* button.
+1. Click the *Install Now* link for the plugin.
+1. Click the *Activate Plugin* link.
 
 = Semi-Automated Install =
 
-1. Download the plugin archive file
-1. Go to the wp-admin/ section of your website
-1. Select the *Plugins* menu item
-1. Select the *Add New* sub-menu item
-1. Click on *Upload* link (just under the Install Plugins page title)
-1. Click the *Browse...* button
-1. Navigate your local folders / directories and choose the zip file you downloaded previously
-1. Click on the *Install Now* button
-1. Click the *Activate Plugin* link
+1. Download the plugin archive file.
+1. Go to the wp-admin/ section of your website.
+1. Select the *Plugins* menu item.
+1. Select the *Add New* sub-menu item.
+1. Click on *Upload* link (just under the Install Plugins page title).
+1. Click the *Browse...* button.
+1. Navigate your local folders / directories and choose the zip file you downloaded previously.
+1. Click on the *Install Now* button.
+1. Click the *Activate Plugin* link.
 
 == Frequently Asked Questions ==
 
@@ -93,6 +95,17 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 * [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
 
 = Changelog / Release Notes =
+
+**Version 1.4.0-1 (2016/10/25)**
+
+* *New Features*
+	* None
+* *Improvements*
+	* Added the 'body' shortcode argument to keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
+* *Bugfixes*
+	* Fixed cache clearing on post save when the content starts with the shortcode (position 0 of the content text).
+* *Developer Notes*
+	* None
 
 **Version 1.3.0-1 (2016/08/24)**
 
@@ -118,7 +131,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 
 == Upgrade Notice ==
 
-= 1.3.0-1 =
+= 1.4.0-1 =
 
-(2016/08/24) Added a save_post() action to clear the cached content.
+(2016/10/25) Added the 'body' shortcode argument. Fixed cache clearing on post save when the content starts with the shortcode.
 
