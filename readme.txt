@@ -94,6 +94,15 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 * [GitHub](https://github.com/jsmoriss/wp-file-get-contents)
 * [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
 
+= Version Numbering Scheme =
+
+Version components: `{major}.{minor}.{bugfix}-{stage}{level}`
+
+* {major} = Major code changes / re-writes or significant feature changes.
+* {minor} = New features / options were added or improved.
+* {bugfix} = Bugfixes or minor improvements.
+* {stage}{level} = dev &lt; a (alpha) &lt; b (beta) &lt; rc (release candidate) &lt; # (production) &mdash; see [PHP's version_compare](http://php.net/manual/en/function.version-compare.php) documentation for additional information. Please note that the production stage level can be incremented for simple text revisions and/or translation updates.
+
 = Changelog / Release Notes =
 
 **Version 1.4.0-1 (2016/10/25)**
