@@ -14,6 +14,15 @@
  * Tested Up To: 4.6.1
  * Version: 1.4.0-1
  * 
+ * Version Components: {major}.{minor}.{bugfix}-{stage}{level}
+ *
+ *	{major}		Major code changes / re-writes or significant feature changes.
+ *	{minor}		New features / options were added or improved.
+ *	{bugfix}	Bugfixes or minor improvements.
+ *	{stage}{level}	dev < a (alpha) < b (beta) < rc (release candidate) < # (production).
+ *
+ * See PHP's version_compare() documentation at http://php.net/manual/en/function.version-compare.php.
+ * 
  * Copyright 2012-2016 Jean-Sebastien Morisset (http://surniaulula.com/)
  */
 
