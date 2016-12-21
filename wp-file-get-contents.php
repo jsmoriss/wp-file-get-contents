@@ -3,10 +3,10 @@
  * Plugin Name: JSM's file_get_contents() Shortcode
  * Text Domain: wp-file-get-contents
  * Domain Path: /languages
- * Plugin URI: http://surniaulula.com/extend/plugins/wp-file-get-contents/
+ * Plugin URI: https://surniaulula.com/extend/plugins/wp-file-get-contents/
  * Assets URI: https://jsmoriss.github.io/wp-file-get-contents/assets/
  * Author: JS Morisset
- * Author URI: http://surniaulula.com/
+ * Author URI: https://surniaulula.com/
  * License: GPLv3
  * License URI: http://www.gnu.org/licenses/gpl.txt
  * Description: A WordPress shortcode for PHP's file_get_contents()
@@ -23,7 +23,7 @@
  *
  * See PHP's version_compare() documentation at http://php.net/manual/en/function.version-compare.php.
  * 
- * Copyright 2012-2016 Jean-Sebastien Morisset (http://surniaulula.com/)
+ * Copyright 2012-2016 Jean-Sebastien Morisset (https://surniaulula.com/)
  */
 
 
