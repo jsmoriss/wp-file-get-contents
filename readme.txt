@@ -107,6 +107,18 @@ Note that the production stage level can be incremented on occasion for simple t
 
 = Changelog / Release Notes =
 
+**Version 1.4.1-1 (2016/12/23)**
+
+* *New Features*
+	* None
+* *Improvements*
+	* None
+* *Bugfixes*
+	* None
+* *Developer Notes*
+	* Maintenance release - minor refactoring of code.
+	* Renamed the wpfgc class to WPFGC.
+
 **Version 1.4.0-1 (2016/10/25)**
 
 * *New Features*
@@ -141,6 +153,10 @@ Note that the production stage level can be incremented on occasion for simple t
 	* None
 
 == Upgrade Notice ==
+
+= 1.4.1-1 =
+
+(2016/12/23) Maintenance release - minor refactoring of code. Renamed the wpfgc class to WPFGC.
 
 = 1.4.0-1 =
 
