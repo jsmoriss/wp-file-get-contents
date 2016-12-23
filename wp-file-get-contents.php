@@ -12,7 +12,7 @@
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires At Least: 3.7
  * Tested Up To: 4.7
- * Version: 1.4.0-1
+ * Version: 1.4.1-1
  * 
  * Version Components: {major}.{minor}.{bugfix}-{stage}{level}
  *
@@ -30,16 +30,17 @@
 if ( ! defined( 'ABSPATH' ) ) 
 	die( 'These aren\'t the droids you\'re looking for...' );
 
-if ( ! class_exists( 'wpfgc' ) ) {
+if ( ! class_exists( 'WPFGC' ) ) {
 
-	class wpfgc {
+	class WPFGC {
 
-		protected static $instance = null;
-		protected static $clear_cache = false;
-		protected static $wpfgc_name = 'wp-file-get-contents';
+		private $clear_cache = false;
+		private $shortcode_name = 'wp-file-get-contents';
+
+		private static $instance;
 
 		public static function &get_instance() {
-			if ( self::$instance === null )
+			if ( ! isset( self::$instance ) )
 				self::$instance = new self;
 			return self::$instance;
 		}
@@ -47,7 +48,7 @@ if ( ! class_exists( 'wpfgc' ) ) {
 		public function __construct() {
 			// allow for a custom shortcode name
 			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME )
-				self::$wpfgc_name = WPFGC_SHORTCODE_NAME;
+				$this->shortcode_name = WPFGC_SHORTCODE_NAME;
 
 			if ( ! is_admin() ) {
 				$this->wpautop();
@@ -68,11 +69,11 @@ if ( ! class_exists( 'wpfgc' ) ) {
 		}
 
 		public function add_shortcode() {
-        		add_shortcode( self::$wpfgc_name, array( &$this, 'do_shortcode' ) );
+        		add_shortcode( $this->shortcode_name, array( &$this, 'do_shortcode' ) );
 		}
 
 		public function remove_shortcode() {
-			remove_shortcode( self::$wpfgc_name );
+			remove_shortcode( $this->shortcode_name );
 		}
 
 		public function do_shortcode( $atts, $content = null ) { 
@@ -101,7 +102,7 @@ if ( ! class_exists( 'wpfgc' ) ) {
 			$cache_salt = __METHOD__.'(url:'.$url.')';
 			$cache_id = __CLASS__.'_'.md5( $cache_salt );
 
-			if ( self::$clear_cache ) {
+			if ( $this->clear_cache ) {
 				delete_transient( $cache_id );
 				return '<p>'.__CLASS__.': <em>cache cleared for '.$url.'</em>.</p>';
 			} elseif ( $cache_expire > 0 ) {
@@ -150,11 +151,11 @@ if ( ! class_exists( 'wpfgc' ) ) {
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 					$is_admin = is_admin();
 					if ( isset( $post_obj->post_content ) &&
-						stripos( $post_obj->post_content, '['.self::$wpfgc_name ) !== false ) {
+						stripos( $post_obj->post_content, '['.$this->shortcode_name ) !== false ) {
 
 						if ( $is_admin )
 							$this->add_shortcode();
-						self::$clear_cache = true;	// clear cache and return
+						$this->clear_cache = true;	// clear cache and return
 						$content = do_shortcode( $post_obj->post_content );
 						if ( $is_admin )
 							$this->remove_shortcode();
@@ -171,8 +172,7 @@ if ( ! class_exists( 'wpfgc' ) ) {
 		}
 	}
 
-        global $wpfgc;
-        $wpfgc = wpfgc::get_instance();
+        WPFGC::get_instance();
 }
 
 ?>
