@@ -39,12 +39,6 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		private static $instance;
 
-		public static function &get_instance() {
-			if ( ! isset( self::$instance ) )
-				self::$instance = new self;
-			return self::$instance;
-		}
-
 		public function __construct() {
 			// allow for a custom shortcode name
 			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME )
@@ -54,6 +48,12 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$this->wpautop();
 				$this->add_shortcode();
 			} else add_action( 'save_post', array( &$this, 'clear_cache' ), 10 );
+		}
+
+		public static function &get_instance() {
+			if ( ! isset( self::$instance ) )
+				self::$instance = new self;
+			return self::$instance;
 		}
 
 		public function wpautop() {
