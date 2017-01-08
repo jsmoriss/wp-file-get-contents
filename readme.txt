@@ -91,7 +91,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 
 = Repositories =
 
-* [GitHub](https://github.com/jsmoriss/wp-file-get-contents)
+* [GitHub](https://jsmoriss.github.io/wp-file-get-contents/)
 * [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
 
 = Version Numbering Scheme =
