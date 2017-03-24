@@ -5,7 +5,6 @@ Text Domain: wp-file-get-contents
 Domain Path: /languages
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.txt
-Donate Link: https://www.paypal.me/jsmoriss
 Assets URI: https://jsmoriss.github.io/wp-file-get-contents/assets/
 Tags: file_get_contents, shortcode, include, file, url, body, content
 Contributors: jsmoriss
