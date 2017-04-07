@@ -93,7 +93,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 * [GitHub](https://jsmoriss.github.io/wp-file-get-contents/)
 * [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
 
-= Version Numbering Scheme =
+= Version Numbering =
 
 Version components: `{major}.{minor}.{bugfix}-{stage}{level}`
 
