@@ -104,7 +104,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 = Changelog / Release Notes =
 
-**Version 1.4.1-1 (2016/12/23)**
+**Version 1.4.2 (2017/04/08)**
 
 * *New Features*
 	* None
@@ -113,49 +113,12 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 * *Bugfixes*
 	* None
 * *Developer Notes*
-	* Maintenance release - minor refactoring of code.
-	* Renamed the wpfgc class to WPFGC.
-
-**Version 1.4.0-1 (2016/10/25)**
-
-* *New Features*
-	* None
-* *Improvements*
-	* Added the 'body' shortcode argument to keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
-* *Bugfixes*
-	* Fixed cache clearing on post save when the content starts with the shortcode (position 0 of the content text).
-* *Developer Notes*
-	* None
-
-**Version 1.3.0-1 (2016/08/24)**
-
-* *New Features*
-	* None
-* *Improvements*
-	* Added a `save_post()` action to clear the cached content.
-* *Bugfixes*
-	* None
-* *Developer Notes*
-	* None
-
-**Version 1.2.0 (2016/02/06)**
-
-* *New Features*
-	* None
-* *Improvements*
-	* Added support for a WPFGC_SHORTCODE_NAME constant to change the default shortcode name.
-* *Bugfixes*
-	* None
-* *Developer Notes*
-	* None
+	* Maintenance release - update to version numbering scheme.
+	* Dropped the package number from the production version string.
 
 == Upgrade Notice ==
 
-= 1.4.1-1 =
+= 1.4.2 =
 
-(2016/12/23) Maintenance release - minor refactoring of code. Renamed the wpfgc class to WPFGC.
-
-= 1.4.0-1 =
-
-(2016/10/25) Added the 'body' shortcode argument. Fixed cache clearing on post save when the content starts with the shortcode.
+(2017/04/08) Maintenance release - update to version numbering scheme.
 
