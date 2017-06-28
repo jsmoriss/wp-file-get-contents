@@ -117,11 +117,13 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			if ( $more_link && ! is_singular() ) {
 				global $post;
 				$parts = get_extended( $content );
-				if ( $parts['more_text'] )
+				if ( $parts['more_text'] ) {
 					$content = $parts['main'].apply_filters( 'the_content_more_link', 
 						' <a href="'.get_permalink().'#more-{'.$post->ID.'}" class="more-link">'.$parts['more_text'].'</a>', 
 							$parts['more_text'] );
-				else $content = $parts['main'];
+				} else {
+					$content = $parts['main'];
+				}
 			}
 
 			$content = '<div class="wp_file_get_contents'.$add_class.'">'."\n".
