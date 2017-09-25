@@ -105,7 +105,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 = Changelog / Release Notes =
 
-**Version 1.4.2 (2017/04/08)**
+**Version 1.5.0 (2017/09/25)**
 
 * *New Features*
 	* None
@@ -114,12 +114,11 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 * *Bugfixes*
 	* None
 * *Developer Notes*
-	* Maintenance release - update to version numbering scheme.
-	* Dropped the package number from the production version string.
+	* Added a method hooked to the WordPress 'plugins_loaded' action to load the text domain.
 
 == Upgrade Notice ==
 
-= 1.4.2 =
+= 1.5.0 =
 
-(2017/04/08) Maintenance release - update to version numbering scheme.
+(2017/09/25) Added a method hooked to the WordPress 'plugins_loaded' action to load the text domain.
 
