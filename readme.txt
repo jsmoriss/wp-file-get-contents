@@ -11,7 +11,7 @@ Contributors: jsmoriss
 Requires At Least: 3.7
 Tested Up To: 4.8.2
 Requires PHP: 5.3
-Stable Tag: 1.4.2
+Stable Tag: 1.5.0
 
 A WordPress shortcode for PHP's file_get_contents() function.
 
