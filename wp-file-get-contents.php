@@ -144,7 +144,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				'</div><!-- .wp_file_get_contents -->'."\n";
 
 			if ( $do_filter ) {
-				$this->remove_shortcode();	// prevent recursion
+				$this->remove_shortcode();	// just in case - prevent recursion
 				$content = apply_filters( $do_filter, $content );
 				$this->add_shortcode();
 			}
