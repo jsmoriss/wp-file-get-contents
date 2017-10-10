@@ -75,13 +75,13 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 
 == Frequently Asked Questions ==
 
-= Frequently Asked Questions =
+<h3>Frequently Asked Questions</h3>
 
 * None
 
 == Other Notes ==
 
-= Additional Documentation =
+<h3>Additional Documentation</h3>
 
 * None
 
@@ -89,12 +89,12 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 
 == Changelog ==
 
-= Repositories =
+<h3>Repositories</h3>
 
 * [GitHub](https://jsmoriss.github.io/wp-file-get-contents/)
 * [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
 
-= Version Numbering =
+<h3>Version Numbering</h3>
 
 Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
@@ -103,7 +103,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 * {bugfix} = Backwards-compatible bug fixes or small improvements.
 * {stage}.{level} = Pre-production release: dev < a (alpha) < b (beta) < rc (release candidate).
 
-= Changelog / Release Notes =
+<h3>Changelog / Release Notes</h3>
 
 **Version 1.5.0 (2017/09/25)**
 

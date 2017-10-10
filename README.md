@@ -79,7 +79,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 
 <h2>Frequently Asked Questions</h2>
 
-<h4>Frequently Asked Questions</h4>
+<h3>Frequently Asked Questions</h3>
 
 <ul>
 <li>None</li>
@@ -89,7 +89,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 <h2>Other Notes</h2>
 
 <h3>Other Notes</h3>
-<h4>Additional Documentation</h4>
+<h3>Additional Documentation</h3>
 
 <ul>
 <li>None</li>
