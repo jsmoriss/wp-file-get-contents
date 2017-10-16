@@ -172,8 +172,10 @@ if ( ! class_exists( 'WPFGC' ) ) {
 						if ( $is_admin ) {
 							$this->add_shortcode();
 						}
+
 						$this->do_clear_cache = true;	// clear cache and return
 						$content = do_shortcode( $post_obj->post_content );
+
 						if ( $is_admin ) {
 							$this->remove_shortcode();
 						}
