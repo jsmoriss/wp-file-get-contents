@@ -91,7 +91,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$do_filter = isset( $atts['filter'] ) ? $atts['filter'] : false;		// optional content filter
 			$more_link = isset( $atts['more'] ) ? self::get_bool( $atts['more'] ) : true;	// add more link (default is true)
 			$body_only = isset( $atts['body'] ) ? self::get_bool( $atts['body'] ) : true;	// keep only <body></body> content
-			$cache_exp = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;		// allow for 0 seconds (default 1 hour)
+			$cache_exp_secs = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;	// allow for 0 seconds (default 1 hour)
 
 			// determine the url / filename to retrieve
 			if ( ! empty( $atts['url'] ) && preg_match( '/^https?:\/\//', $atts['url'] ) ) {
@@ -111,7 +111,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			if ( $this->do_clear_cache ) {
 				delete_transient( $cache_id );
 				return '<p>'.__CLASS__.': <em>cache cleared for '.$url.'</em>.</p>';
-			} elseif ( $cache_exp > 0 ) {
+			} elseif ( $cache_exp_secs > 0 ) {
 				$content = get_transient( $cache_id );
 			} else {
 				delete_transient( $cache_id );
@@ -149,8 +149,8 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$this->add_shortcode();
 			}
 
-			if ( $cache_exp > 0 ) {
-				set_transient( $cache_id, $content, $cache_exp );	// save rendered content
+			if ( $cache_exp_secs > 0 ) {
+				set_transient( $cache_id, $content, $cache_exp_secs );	// save rendered content
 			}
 
 			return $content;
