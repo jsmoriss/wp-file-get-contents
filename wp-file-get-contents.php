@@ -84,7 +84,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			remove_shortcode( $this->shortcode_name );
 		}
 
-		public function do_shortcode( $atts, $content = null ) { 
+		public function do_shortcode( $atts = array(), $content = null, $tag = '' ) { 
 
 			if ( ! is_array( $atts ) ) {	// empty string if no shortcode attributes
 				$atts = array();
