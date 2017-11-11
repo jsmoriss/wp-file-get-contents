@@ -86,6 +86,10 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		public function do_shortcode( $atts, $content = null ) { 
 
+			if ( ! is_array( $atts ) ) {	// empty string if no shortcode attributes
+				$atts = array();
+			}
+
 			$add_pre = isset( $atts['pre'] ) ? self::get_bool( $atts['pre'] ) : false;	// wrap content in pre tags (default is false)
 			$add_class = empty( $atts['class'] ) ? '' : ' '.$atts['class'];			// optional css class names
 			$do_filter = isset( $atts['filter'] ) ? $atts['filter'] : false;		// optional content filter
