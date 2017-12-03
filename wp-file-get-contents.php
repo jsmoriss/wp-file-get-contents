@@ -198,4 +198,3 @@ if ( ! class_exists( 'WPFGC' ) ) {
         WPFGC::get_instance();
 }
 
-?>
