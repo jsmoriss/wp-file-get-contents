@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: JSM's file_get_contents() Shortcode
  * Text Domain: wp-file-get-contents
