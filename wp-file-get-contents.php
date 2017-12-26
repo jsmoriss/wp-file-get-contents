@@ -92,11 +92,11 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			$add_pre = isset( $atts['pre'] ) ? self::get_bool( $atts['pre'] ) : false;	// wrap content in pre tags (default is false)
-			$add_class = empty( $atts['class'] ) ? '' : ' '.$atts['class'];			// optional css class names
+			$add_class = empty( $atts['class'] ) ? '' : ' ' . $atts['class'];		// optional css class names
 			$do_filter = isset( $atts['filter'] ) ? $atts['filter'] : false;		// optional content filter
 			$more_link = isset( $atts['more'] ) ? self::get_bool( $atts['more'] ) : true;	// add more link (default is true)
 			$body_only = isset( $atts['body'] ) ? self::get_bool( $atts['body'] ) : true;	// keep only <body></body> content
-			$cache_secs = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;	// allow for 0 seconds (default 1 hour)
+			$cache_secs = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;		// allow for 0 seconds (default 1 hour)
 
 			// determine the url / filename to retrieve
 			if ( ! empty( $atts['url'] ) && preg_match( '/^https?:\/\//', $atts['url'] ) ) {
@@ -106,16 +106,16 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			} elseif ( ! empty( $atts['file'] ) ) {
 				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^\/+|\.\.)/', '', $atts['file'] );
 			} else {
-				return '<p>'.__CLASS__.': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
+				return '<p>' . __CLASS__ . ': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
 			}
 
 			$content = false;	// just in case
-			$cache_salt = __METHOD__.'(url:'.$url.')';
-			$cache_id = __CLASS__.'_'.md5( $cache_salt );
+			$cache_salt = __METHOD__ . '(url:' . $url . ')';
+			$cache_id = __CLASS__ . '_' . md5( $cache_salt );
 
 			if ( $this->do_clear_cache ) {
 				delete_transient( $cache_id );
-				return '<p>'.__CLASS__.': <em>cache cleared for '.$url.'</em>.</p>';
+				return '<p>' . __CLASS__ . ': <em>cache cleared for ' . $url . '</em>.</p>';
 			} elseif ( $cache_secs > 0 ) {
 				$content = get_transient( $cache_id );
 			} else {
@@ -137,16 +137,16 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$parts = get_extended( $content );
 				if ( $parts['more_text'] ) {
 					$content = $parts['main'].apply_filters( 'the_content_more_link', 
-						' <a href="'.get_permalink().'#more-{'.$post->ID.'}" class="more-link">'.$parts['more_text'].'</a>', 
+						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts['more_text'] . '</a>', 
 							$parts['more_text'] );
 				} else {
 					$content = $parts['main'];
 				}
 			}
 
-			$content = '<div class="wp_file_get_contents'.$add_class.'">'."\n".
-				( $add_pre ? "<pre>\n" : '' ).$content.( $add_pre ? "</pre>\n" : '' ).
-				'</div><!-- .wp_file_get_contents -->'."\n";
+			$content = '<div class="wp_file_get_contents' . $add_class . '">' . "\n" . 
+				( $add_pre ? "<pre>\n" : '' ) . $content . ( $add_pre ? "</pre>\n" : '' ) . 
+				'</div><!-- .wp_file_get_contents -->' . "\n";
 
 			if ( $do_filter ) {
 				$this->remove_shortcode();	// just in case - prevent recursion
@@ -172,7 +172,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 
 					if ( isset( $post_obj->post_content ) &&
-						stripos( $post_obj->post_content, '['.$this->shortcode_name ) !== false ) {
+						stripos( $post_obj->post_content, '[' . $this->shortcode_name ) !== false ) {
 
 						if ( $is_admin ) {
 							$this->add_shortcode();
