@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: JSM's file_get_contents() Shortcode
  * Text Domain: wp-file-get-contents
@@ -18,10 +17,10 @@
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
- *	{major}		Major structural code changes / re-writes or incompatible API changes.
- *	{minor}		New functionality was added or improved in a backwards-compatible manner.
- *	{bugfix}	Backwards-compatible bug fixes or small improvements.
- *	{stage}.{level}	Pre-production release: dev < a (alpha) < b (beta) < rc (release candidate).
+ *      {major}		Major structural code changes / re-writes or incompatible API changes.
+ *      {minor}		New functionality was added or improved in a backwards-compatible manner.
+ *      {bugfix}	Backwards-compatible bug fixes or small improvements.
+ *      {stage}.{level}	Pre-production release: dev < a (alpha) < b (beta) < rc (release candidate).
  *
  * Copyright 2012-2017 Jean-Sebastien Morisset (https://surniaulula.com/)
  */
@@ -122,7 +121,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				delete_transient( $cache_id );
 			}
 
-			if ( $content === false ) {
+			if ( false === $content ) {
 				$content = file_get_contents( $url );
 			} else {
 				return $content;	// content from cache
