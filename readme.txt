@@ -92,7 +92,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
 <h3>Repositories</h3>
 
 * [GitHub](https://jsmoriss.github.io/wp-file-get-contents/)
-* [WordPress.org](https://wordpress.org/plugins/wp-file-get-contents/developers/)
+* [WordPress.org](https://plugins.trac.wordpress.org/browser/wp-file-get-contents/)
 
 <h3>Version Numbering</h3>
 
