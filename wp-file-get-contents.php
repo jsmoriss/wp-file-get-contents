@@ -108,7 +108,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p>' . __CLASS__ . ': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
 			}
 
-			$content = false;	// just in case
+			$content = false;	// Just in case.
 			$cache_salt = __METHOD__ . '(url:' . $url . ')';
 			$cache_id = __CLASS__ . '_' . md5( $cache_salt );
 
@@ -148,7 +148,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				'</div><!-- .wp_file_get_contents -->' . "\n";
 
 			if ( $do_filter ) {
-				$this->remove_shortcode();	// just in case - prevent recursion
+				$this->remove_shortcode();	// Just in case - prevent recursion.
 				$content = apply_filters( $do_filter, $content );
 				$this->add_shortcode();
 			}
