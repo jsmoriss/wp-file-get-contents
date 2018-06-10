@@ -55,9 +55,11 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		}
 
 		public static function &get_instance() {
+
 			if ( ! isset( self::$instance ) ) {
 				self::$instance = new self;
 			}
+
 			return self::$instance;
 		}
 
