@@ -47,7 +47,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			if ( is_admin() ) {
-				add_action( 'save_post', array( &$this, 'clear_post_cache' ), 10 );
+				add_action( 'save_post', array( $this, 'clear_post_cache' ), 10 );
 			} else {
 				$this->check_wpautop();
 				$this->add_shortcode();
@@ -79,7 +79,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		}
 
 		public function add_shortcode() {
-        		add_shortcode( $this->shortcode_name, array( &$this, 'do_shortcode' ) );
+        		add_shortcode( $this->shortcode_name, array( $this, 'do_shortcode' ) );
 		}
 
 		public function remove_shortcode() {
