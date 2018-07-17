@@ -98,11 +98,11 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 **Version 1.5.0 (2017/09/25)**
 
 * *New Features*
-	* None
+	* None.
 * *Improvements*
-	* None
+	* None.
 * *Bugfixes*
-	* None
+	* None.
 * *Developer Notes*
 	* Added a method hooked to the WordPress 'plugins_loaded' action to load the text domain.
 
