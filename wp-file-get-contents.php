@@ -110,9 +110,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p>' . __CLASS__ . ': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
 			}
 
-			$content = false;	// Just in case.
+			$content    = false;	// Just in case.
 			$cache_salt = __METHOD__ . '(url:' . $url . ')';
-			$cache_id = __CLASS__ . '_' . md5( $cache_salt );
+			$cache_id   = __CLASS__ . '_' . md5( $cache_salt );
 
 			if ( $this->do_clear_cache ) {
 				delete_transient( $cache_id );
