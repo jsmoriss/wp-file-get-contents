@@ -68,11 +68,17 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		}
 
 		public function check_wpautop() {
+
 			$default_priority = 10;
+
 			foreach ( array( 'get_the_excerpt', 'the_excerpt', 'the_content' ) as $filter_name ) {
+
 				$filter_priority = has_filter( $filter_name, 'wpautop' );
-				if ( $filter_priority !== false && $filter_priority > $default_priority ) {
+
+				if ( false !== $filter_priority && $filter_priority > $default_priority ) {
+
 					remove_filter( $filter_name, 'wpautop' );
+
 					add_filter( $filter_name, 'wpautop' , $default_priority );
 				}
 			}
@@ -129,7 +135,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return $content;	// content from cache
 			}
 		
-			if ( $body_only && stripos( $content, '<body' ) !== false ) {
+			if ( $body_only && false !== stripos( $content, '<body' ) ) {
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 			}
 
@@ -163,31 +169,36 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		}
 
 		public function clear_post_cache( $post_id, $rel_id = false ) {
+
 			switch ( get_post_status( $post_id ) ) {
+
 				case 'draft':
 				case 'pending':
 				case 'future':
 				case 'private':
 				case 'publish':
+
 					$is_admin = is_admin();
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 
-					if ( isset( $post_obj->post_content ) &&
-						stripos( $post_obj->post_content, '[' . $this->shortcode_name ) !== false ) {
+					if ( isset( $post_obj->post_content ) && false !== stripos( $post_obj->post_content, '[' . $this->shortcode_name ) ) {
 
 						if ( $is_admin ) {
 							$this->add_shortcode();
 						}
 
 						$this->do_clear_cache = true;	// clear cache and return
+
 						$content = do_shortcode( $post_obj->post_content );
 
 						if ( $is_admin ) {
 							$this->remove_shortcode();
 						}
 					}
+
 					break;
 			}
+
 			return $post_id;
 		}
 
