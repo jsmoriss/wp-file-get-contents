@@ -106,10 +106,10 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$cache_secs = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;		// allow for 0 seconds (default 1 hour)
 
 			// determine the url / filename to retrieve
-			if ( ! empty( $atts['url'] ) && preg_match( '/^https?:\/\//', $atts['url'] ) ) {
-				$url = $atts['url'];
-			} elseif ( ! empty( $atts['url'] ) && preg_match( '/^file:\/\//', $atts['url'] ) ) {
-				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^file:\/\/|\.\.)/', '', $atts['url'] );
+			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
+				$url = $atts[ 'url' ];
+			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
+				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
 			} elseif ( ! empty( $atts['file'] ) ) {
 				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^\/+|\.\.)/', '', $atts['file'] );
 			} else {
