@@ -202,8 +202,11 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			return $post_id;
 		}
 
-		// converts string to boolean
+		/**
+		 * Converts string to boolean.
+		 */
 		private static function get_bool( $mixed ) {
+
 			return is_string( $mixed ) ? filter_var( $mixed, FILTER_VALIDATE_BOOLEAN ) : (bool) $mixed;
 		}
 	}
