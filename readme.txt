@@ -11,7 +11,7 @@ Contributors: jsmoriss
 Requires PHP: 5.6
 Requires At Least: 3.8
 Tested Up To: 5.2.2
-Stable Tag: 1.5.0
+Stable Tag: 2.0.0-dev.2
 
 A WordPress shortcode for PHP's file_get_contents() function.
 
@@ -21,14 +21,14 @@ A WordPress shortcode for PHP's file_get_contents() function.
 
 = Shortcode Attributes =
 
-* url = http, https, or file URI.
-* file = path to a local file (relative to the wp-content/ folder).
-* cache = number of seconds to cache the content in the transient cache (defaults is 3600 seconds).
-* pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
-* class = wrap the content in the specified div class (default is none).
-* filter = apply the specified filter to the content (default is none).
-* more = add more link on non-singular web pages (default is true).
-* body = keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
+* url = URL or file URI.
+* file = Path to a local file (relative to the wp-content/ folder).
+* cache = Number of seconds to cache the content in the transient cache (defaults is 3600 seconds).
+* pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
+* class = Wrap the content in the specified div class (default is none).
+* filter = Apply the specified filter to the content (default is none).
+* more = Add more link on non-singular web pages (default is true).
+* body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 
 All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are read as wordpress/wp-contents/dir/file.html. The `..` folder name is removed from file paths to prevent backing out of the wp-content/ folder.
 
@@ -37,7 +37,7 @@ All file paths are relative to the wp-content/ folder &mdash; you cannot include
 The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').
 
 <pre>
-define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
+define( 'WPFGC_SHORTCODE_NAME', 'include' );
 </pre>
 
 = Shortcode Examples =

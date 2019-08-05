@@ -13,7 +13,7 @@
  * Requires PHP: 5.6
  * Requires At Least: 3.8
  * Tested Up To: 5.2.2
- * Version: 1.5.0
+ * Version: 2.0.0-dev.2
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -33,25 +33,35 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 	class WPFGC {
 
-		private $do_clear_cache = false;
-		private $shortcode_name = 'wp-file-get-contents';
+		private $cache_disabled = false;
+
+		private $shortcode_names = array(
+			'wp-file-get-contents',
+			'wpfgc',
+		);
 
 		private static $instance;
 
 		public function __construct() {
+
 			add_action( 'plugins_loaded', array( __CLASS__, 'load_textdomain' ) );
 
-			// allow for a custom shortcode name
+			/**
+			 * Allow for an additional custom shortcode name.
+			 */
 			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME ) {
-				$this->shortcode_name = WPFGC_SHORTCODE_NAME;
+				if ( ! in_array( WPFGC_SHORTCODE_NAME ) ) {	// Just in case.
+					$this->shortcode_names[] = WPFGC_SHORTCODE_NAME;
+				}
 			}
 
 			if ( is_admin() ) {
 				add_action( 'save_post', array( $this, 'clear_post_cache' ), 10 );
-			} else {
-				$this->check_wpautop();
-				$this->add_shortcode();
 			}
+
+			$this->check_wpautop();
+
+			$this->add_shortcodes();
 		}
 
 		public static function &get_instance() {
@@ -64,6 +74,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		}
 
 		public static function load_textdomain() {
+
 			load_plugin_textdomain( 'wp-file-get-contents', false, 'wp-file-get-contents/languages/' );
 		}
 
@@ -84,81 +95,96 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 		}
 
-		public function add_shortcode() {
-        		add_shortcode( $this->shortcode_name, array( $this, 'do_shortcode' ) );
+		public function add_shortcodes() {
+
+			foreach ( $this->shortcode_names as $name ) {
+        			add_shortcode( $name, array( $this, 'do_shortcode' ) );
+			}
 		}
 
-		public function remove_shortcode() {
-			remove_shortcode( $this->shortcode_name );
+		public function remove_shortcodes() {
+
+			foreach ( $this->shortcode_names as $name ) {
+				remove_shortcode( $name );
+			}
 		}
 
 		public function do_shortcode( $atts = array(), $content = null, $tag = '' ) { 
 
-			if ( ! is_array( $atts ) ) {	// empty string if no shortcode attributes
+			if ( ! is_array( $atts ) ) {	// Empty string if no shortcode attributes.
 				$atts = array();
 			}
 
-			$add_pre = isset( $atts['pre'] ) ? self::get_bool( $atts['pre'] ) : false;	// wrap content in pre tags (default is false)
-			$add_class = empty( $atts[ 'class' ] ) ? '' : ' ' . $atts[ 'class' ];		// optional css class names
-			$do_filter = isset( $atts['filter'] ) ? $atts['filter'] : false;		// optional content filter
-			$more_link = isset( $atts['more'] ) ? self::get_bool( $atts['more'] ) : true;	// add more link (default is true)
-			$body_only = isset( $atts['body'] ) ? self::get_bool( $atts['body'] ) : true;	// keep only <body></body> content
-			$cache_secs = isset( $atts['cache'] ) ? (int) $atts['cache'] : 3600;		// allow for 0 seconds (default 1 hour)
+			$add_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
+			$add_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . $atts[ 'class' ];			// Optional css class names.
+			$do_filter  = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : false;			// Optional content filter.
+			$more_link  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
+			$only_body  = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;	// Keep only <body></body> content.
+			$cache_secs = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;		// Allow for 0 seconds (default 1 hour).
 
-			// determine the url / filename to retrieve
+			/**
+			 * Determine the url / filename to retrieve.
+			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
 				$url = $atts[ 'url' ];
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
 				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
-			} elseif ( ! empty( $atts['file'] ) ) {
-				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^\/+|\.\.)/', '', $atts['file'] );
+			} elseif ( ! empty( $atts[ 'file' ] ) ) {
+				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
 			} else {
 				return '<p>' . __CLASS__ . ': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
 			}
 
-			$content    = false;	// Just in case.
 			$cache_salt = __METHOD__ . '(url:' . $url . ')';
 			$cache_id   = __CLASS__ . '_' . md5( $cache_salt );
 
-			if ( $this->do_clear_cache ) {
-				delete_transient( $cache_id );
-				return '<p>' . __CLASS__ . ': <em>cache cleared for ' . $url . '</em>.</p>';
-			} elseif ( $cache_secs > 0 ) {
+			if ( ! $this->cache_disabled && $cache_secs > 0 ) {
+
 				$content = get_transient( $cache_id );
+
+				if ( false !== $content ) {
+					return $content;
+				}
+
 			} else {
 				delete_transient( $cache_id );
 			}
 
-			if ( false === $content ) {
-				$content = file_get_contents( $url );
-			} else {
-				return $content;	// content from cache
-			}
+			$content = file_get_contents( $url );
 		
-			if ( $body_only && false !== stripos( $content, '<body' ) ) {
+			if ( $only_body && false !== stripos( $content, '<body' ) ) {
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 			}
 
 			if ( $more_link && ! is_singular() ) {
+
 				global $post;
+
 				$parts = get_extended( $content );
-				if ( $parts['more_text'] ) {
-					$content = $parts['main'].apply_filters( 'the_content_more_link', 
-						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts['more_text'] . '</a>', 
-							$parts['more_text'] );
+
+				if ( $parts[ 'more_text' ] ) {
+
+					$content = $parts[ 'main' ].apply_filters( 'the_content_more_link', 
+						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts[ 'more_text' ] . '</a>', 
+							$parts[ 'more_text' ] );
+
 				} else {
-					$content = $parts['main'];
+
+					$content = $parts[ 'main' ];
 				}
 			}
 
 			$content = '<div class="wp_file_get_contents' . $add_class . '">' . "\n" . 
 				( $add_pre ? "<pre>\n" : '' ) . $content . ( $add_pre ? "</pre>\n" : '' ) . 
-				'</div><!-- .wp_file_get_contents -->' . "\n";
+					'</div><!-- .wp_file_get_contents -->' . "\n";
 
 			if ( $do_filter ) {
-				$this->remove_shortcode();	// Just in case - prevent recursion.
+
+				$this->remove_shortcodes();	// Just in case - prevent recursion.
+
 				$content = apply_filters( $do_filter, $content );
-				$this->add_shortcode();
+
+				$this->add_shortcodes();
 			}
 
 			if ( $cache_secs > 0 ) {
@@ -179,20 +205,21 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				case 'publish':
 
 					$is_admin = is_admin();
+
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 
-					if ( isset( $post_obj->post_content ) && false !== stripos( $post_obj->post_content, '[' . $this->shortcode_name ) ) {
+					if ( isset( $post_obj->post_content ) ) {	// Just in case.
 
-						if ( $is_admin ) {
-							$this->add_shortcode();
-						}
+						foreach ( $this->shortcode_names as $name ) {
 
-						$this->do_clear_cache = true;	// clear cache and return
+							if ( false !== stripos( $post_obj->post_content, '[' . $name ) ) {
 
-						$content = do_shortcode( $post_obj->post_content );
+								$this->cache_disabled = true;	// clear cache and return
 
-						if ( $is_admin ) {
-							$this->remove_shortcode();
+								$content = do_shortcode( $post_obj->post_content );
+
+								break;	// Stop after first shortcode match.
+							}
 						}
 					}
 
