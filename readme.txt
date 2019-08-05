@@ -30,11 +30,11 @@ A WordPress shortcode for PHP's file_get_contents() function.
 * more = Add more link on non-singular web pages (default is true).
 * body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 
-All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are read as wordpress/wp-contents/dir/file.html. The `..` folder name is removed from file paths to prevent backing out of the wp-content/ folder.
+All local file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also removed from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
-The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').
+The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to add an additional custom shortcode name (the default shortcode names are 'wp-file-get-contents' and 'wpfgc').
 
 <pre>
 define( 'WPFGC_SHORTCODE_NAME', 'include' );
@@ -43,10 +43,10 @@ define( 'WPFGC_SHORTCODE_NAME', 'include' );
 = Shortcode Examples =
 
 <pre>
-&#91;wp-file-get-contents url="http://example.com/dir/file.html"&#93;
-&#91;wp-file-get-contents url="http://example.com/counter/" cache="7200"&#93;
-&#91;wp-file-get-contents url="file://dir/file.html"&#93;
-&#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
+&#91;wpfgc url="http://example.com/dir/file.html"&#93;
+&#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
+&#91;wpfgc url="file://dir/file.html"&#93;
+&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
 </pre>
 
 == Installation ==
@@ -95,6 +95,17 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
+**Version 2.0.0-dev.2 (2019/08/05)**
+
+* **New Features**
+	* None.
+* **Improvements**
+	* Added support for both short and long default shortcode names, plus an additional custom shortcode name.
+* **Bugfixes**
+	* None.
+* **Developer Notes**
+	* None.
+
 **Version 1.5.0 (2017/09/25)**
 
 * **New Features**
@@ -107,6 +118,10 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* Added a method hooked to the WordPress 'plugins_loaded' action to load the text domain.
 
 == Upgrade Notice ==
+
+= 2.0.0-dev.2 =
+
+(2019/08/05) Added support for both short and long default shortcode names, plus an additional custom shortcode name.
 
 = 1.5.0 =
 
