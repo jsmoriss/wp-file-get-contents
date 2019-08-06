@@ -3,7 +3,7 @@
 <table>
 <tr><th align="right" valign="top" nowrap>Plugin Name</th><td>JSM&#039;s file_get_contents() Shortcode</td></tr>
 <tr><th align="right" valign="top" nowrap>Summary</th><td>A WordPress shortcode for PHP&#039;s file_get_contents() function.</td></tr>
-<tr><th align="right" valign="top" nowrap>Stable Version</th><td>1.5.0</td></tr>
+<tr><th align="right" valign="top" nowrap>Stable Version</th><td>2.0.0</td></tr>
 <tr><th align="right" valign="top" nowrap>Requires At Least</th><td>WordPress 3.8</td></tr>
 <tr><th align="right" valign="top" nowrap>Tested Up To</th><td>WordPress 5.2.2</td></tr>
 <tr><th align="right" valign="top" nowrap>Contributors</th><td>jsmoriss</td></tr>
@@ -18,33 +18,33 @@
 <h4>Shortcode Attributes</h4>
 
 <ul>
-<li>url = http, https, or file URI.</li>
-<li>file = path to a local file (relative to the wp-content/ folder).</li>
-<li>cache = number of seconds to cache the content in the transient cache (defaults is 3600 seconds).</li>
-<li>pre = wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).</li>
-<li>class = wrap the content in the specified div class (default is none).</li>
-<li>filter = apply the specified filter to the content (default is none).</li>
-<li>more = add more link on non-singular web pages (default is true).</li>
-<li>body = keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).</li>
+<li>url = URL or file URI.</li>
+<li>file = Path to a local file (relative to the wp-content/ folder).</li>
+<li>cache = Number of seconds to cache the content in the transient cache (defaults is 3600 seconds).</li>
+<li>pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).</li>
+<li>class = Wrap the content in the specified div class (default is none).</li>
+<li>filter = Apply the specified filter to the content (default is none).</li>
+<li>more = Add more link on non-singular web pages (default is true).</li>
+<li>body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).</li>
 </ul>
 
-<p>All file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is removed from file paths to prevent backing out of the wp-content/ folder.</p>
+<p>All local file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are both read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is also removed from file paths to prevent backing out of the wp-content/ folder.</p>
 
 <h4>Shortcode Name</h4>
 
-<p>The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to change the default shortcode name (the default shortcode name is 'wp-file-get-contents').</p>
+<p>The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to add an additional custom shortcode name (the default shortcode names are 'wp-file-get-contents' and 'wpfgc').</p>
 
 <pre>
-define( 'WPFGC_SHORTCODE_NAME', 'wpfgc' );
+define( 'WPFGC_SHORTCODE_NAME', 'include' );
 </pre>
 
 <h4>Shortcode Examples</h4>
 
 <pre>
-&#91;wp-file-get-contents url="http://example.com/dir/file.html"&#93;
-&#91;wp-file-get-contents url="http://example.com/counter/" cache="7200"&#93;
-&#91;wp-file-get-contents url="file://dir/file.html"&#93;
-&#91;wp-file-get-contents file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
+&#91;wpfgc url="http://example.com/dir/file.html"&#93;
+&#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
+&#91;wpfgc url="file://dir/file.html"&#93;
+&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
 </pre>
 
 
