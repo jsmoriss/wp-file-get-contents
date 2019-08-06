@@ -13,7 +13,7 @@
  * Requires PHP: 5.6
  * Requires At Least: 3.8
  * Tested Up To: 5.2.2
- * Version: 2.0.0-dev.2
+ * Version: 2.0.0
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -174,7 +174,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
-			$content = '<div class="wp_file_get_contents' . $add_class . '">' . "\n" . 
+			$content = '<div class="wp_file_get_contents wpfgc' . $add_class . '">' . "\n" . 
 				( $add_pre ? "<pre>\n" : '' ) . $content . ( $add_pre ? "</pre>\n" : '' ) . 
 					'</div><!-- .wp_file_get_contents -->' . "\n";
 
