@@ -106,24 +106,9 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 * **Developer Notes**
 	* None.
 
-**Version 1.5.0 (2017/09/25)**
-
-* **New Features**
-	* None.
-* **Improvements**
-	* None.
-* **Bugfixes**
-	* None.
-* **Developer Notes**
-	* Added a method hooked to the WordPress 'plugins_loaded' action to load the text domain.
-
 == Upgrade Notice ==
 
 = 2.0.0 =
 
 (2019/08/05) Added support for both short and long default shortcode names, plus an additional custom shortcode name.
-
-= 1.5.0 =
-
-(2017/09/25) Added a method hooked to the WordPress 'plugins_loaded' action to load the text domain.
 
