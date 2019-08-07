@@ -117,7 +117,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			$add_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
 			$add_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . $atts[ 'class' ];			// Optional css class names.
-			$do_filter  = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : false;			// Optional content filter.
+			$do_filter  = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Optional content filter.
 			$more_link  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
 			$only_body  = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;	// Keep only <body></body> content.
 			$cache_secs = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;		// Allow for 0 seconds (default 1 hour).
@@ -188,7 +188,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			if ( $cache_secs > 0 ) {
-				set_transient( $cache_id, $content, $cache_secs );	// save rendered content
+				set_transient( $cache_id, $content, $cache_secs );	// Save rendered content.
 			}
 
 			return $content;
