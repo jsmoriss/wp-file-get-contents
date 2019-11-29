@@ -123,7 +123,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$cache_secs = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;		// Allow for 0 seconds (default 1 hour).
 
 			/**
-			 * Determine the url / filename to retrieve.
+			 * Determine the url / file name to retrieve.
 			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
 				$url = $atts[ 'url' ];
