@@ -50,7 +50,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			 * Allow for an additional custom shortcode name.
 			 */
 			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME ) {
+
 				if ( ! in_array( WPFGC_SHORTCODE_NAME ) ) {	// Just in case.
+
 					$this->shortcode_names[] = WPFGC_SHORTCODE_NAME;
 				}
 			}
