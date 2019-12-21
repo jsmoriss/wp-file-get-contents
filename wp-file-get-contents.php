@@ -11,7 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl.txt
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires PHP: 5.5
- * Requires At Least: 3.9
+ * Requires At Least: 4.0
  * Tested Up To: 5.3.2
  * Version: 2.0.0
  * 
