@@ -224,7 +224,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 							if ( false !== stripos( $post_obj->post_content, '[' . $name ) ) {
 
-								$this->cache_disabled = true;	// clear cache and return
+								$this->cache_disabled = true;	// Clear cache and return.
 
 								$content = do_shortcode( $post_obj->post_content );
 
