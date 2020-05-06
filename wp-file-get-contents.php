@@ -40,7 +40,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			'wpfgc',
 		);
 
-		private static $instance;
+		private static $instance = null;
 
 		public function __construct() {
 
@@ -68,7 +68,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		public static function &get_instance() {
 
-			if ( ! isset( self::$instance ) ) {
+			if ( null === self::$instance ) {
 				self::$instance = new self;
 			}
 
