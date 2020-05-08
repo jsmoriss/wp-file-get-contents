@@ -11,7 +11,7 @@ Contributors: jsmoriss
 Requires PHP: 5.6
 Requires At Least: 4.2
 Tested Up To: 5.4.1
-Stable Tag: 2.0.0
+Stable Tag: 2.1.0
 
 A WordPress shortcode for PHP's file_get_contents() function.
 
@@ -95,20 +95,23 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 2.0.0 (2019/08/05)**
+**Version 2.1.0 (2020/05/08)**
 
 * **New Features**
 	* None.
 * **Improvements**
-	* Added support for both short and long default shortcode names, plus an additional custom shortcode name.
+	* None.
 * **Bugfixes**
 	* None.
 * **Developer Notes**
-	* None.
+	* Maintenance release - minor code formatting changes.
+* **Requires At Least**
+	* PHP v5.6.
+	* WordPress v4.2.
 
 == Upgrade Notice ==
 
-= 2.0.0 =
+= 2.1.0 =
 
-(2019/08/05) Added support for both short and long default shortcode names, plus an additional custom shortcode name.
+(2020/05/08) Maintenance release - minor code formatting changes.
 
