@@ -13,7 +13,7 @@
  * Requires PHP: 5.6
  * Requires At Least: 4.2
  * Tested Up To: 5.4.1
- * Version: 2.0.0
+ * Version: 2.1.0
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -69,6 +69,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		public static function &get_instance() {
 
 			if ( null === self::$instance ) {
+
 				self::$instance = new self;
 			}
 
@@ -136,12 +137,19 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			 * Determine the url / file name to retrieve.
 			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
+
 				$url = $atts[ 'url' ];
+
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
+
 				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
+
 			} elseif ( ! empty( $atts[ 'file' ] ) ) {
+
 				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
+
 			} else {
+
 				return '<p>' . __CLASS__ . ': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
 			}
 
@@ -153,6 +161,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$content = get_transient( $cache_id );
 
 				if ( false !== $content ) {
+
 					return $content;
 				}
 
@@ -163,6 +172,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$content = file_get_contents( $url );
 		
 			if ( $only_body && false !== stripos( $content, '<body' ) ) {
+
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 			}
 
@@ -174,7 +184,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 				if ( $parts[ 'more_text' ] ) {
 
-					$content = $parts[ 'main' ].apply_filters( 'the_content_more_link', 
+					$content = $parts[ 'main' ] . apply_filters( 'the_content_more_link', 
 						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts[ 'more_text' ] . '</a>', 
 							$parts[ 'more_text' ] );
 
@@ -198,6 +208,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			if ( $cache_secs > 0 ) {
+
 				set_transient( $cache_id, $content, $cache_secs );	// Save rendered content.
 			}
 
