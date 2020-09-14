@@ -26,6 +26,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
+
 	die( 'These aren\'t the droids you\'re looking for.' );
 }
 
@@ -58,6 +59,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			if ( is_admin() ) {
+
 				add_action( 'save_post', array( $this, 'clear_post_cache' ), 10 );
 			}
 
@@ -81,6 +83,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			static $loaded = null;
 
 			if ( null !== $loaded ) {
+
 				return;
 			}
 
@@ -123,6 +126,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		public function do_shortcode( $atts = array(), $content = null, $tag = '' ) { 
 
 			if ( ! is_array( $atts ) ) {	// Empty string if no shortcode attributes.
+
 				$atts = array();
 			}
 
