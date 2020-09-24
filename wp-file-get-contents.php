@@ -174,7 +174,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			$content = file_get_contents( $url );
-		
+
 			if ( $only_body && false !== stripos( $content, '<body' ) ) {
 
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
