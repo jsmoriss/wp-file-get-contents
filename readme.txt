@@ -13,11 +13,11 @@ Requires At Least: 4.4
 Tested Up To: 5.5.1
 Stable Tag: 2.2.0
 
-A WordPress shortcode for PHP's file_get_contents() function.
+A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
 == Description ==
 
-A WordPress shortcode for PHP's file_get_contents() function.
+A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
 = Shortcode Attributes =
 
@@ -30,7 +30,7 @@ A WordPress shortcode for PHP's file_get_contents() function.
 * more = Add more link on non-singular web pages (default is true).
 * body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 
-All local file paths are relative to the wp-content/ folder &mdash; you cannot include files outside of the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also removed from file paths to prevent backing out of the wp-content/ folder.
+**Note that all local file paths are relative to the wp-content/ folder** &mdash; you cannot include files from outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
