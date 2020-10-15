@@ -80,16 +80,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		public function init_textdomain() {
 
-			static $local_cache = null;
-
-			if ( null === $local_cache ) {
-
-				$local_cache = 'wp-file-get-contents';
-
-				load_plugin_textdomain( 'wp-file-get-contents', false, 'wp-file-get-contents/languages/' );
-			}
-
-			return $local_cache;
+			load_plugin_textdomain( 'wp-file-get-contents', false, 'wp-file-get-contents/languages/' );
 		}
 
 		public function check_wpautop() {
