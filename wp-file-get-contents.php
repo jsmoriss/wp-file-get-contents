@@ -41,7 +41,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			'wpfgc',
 		);
 
-		private static $instance = null;
+		private static $instance = null;	// WPFGC class object.
 
 		public function __construct() {
 
