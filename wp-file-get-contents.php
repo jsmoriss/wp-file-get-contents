@@ -116,7 +116,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 		}
 
-		public function do_shortcode( $atts = array(), $content = null, $tag = '' ) { 
+		public function do_shortcode( $atts = array(), $content = null, $tag = '' ) {
 
 			if ( ! is_array( $atts ) ) {	// Empty string if no shortcode attributes.
 
@@ -181,8 +181,8 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 				if ( $parts[ 'more_text' ] ) {
 
-					$content = $parts[ 'main' ] . apply_filters( 'the_content_more_link', 
-						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts[ 'more_text' ] . '</a>', 
+					$content = $parts[ 'main' ] . apply_filters( 'the_content_more_link',
+						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts[ 'more_text' ] . '</a>',
 							$parts[ 'more_text' ] );
 
 				} else {
