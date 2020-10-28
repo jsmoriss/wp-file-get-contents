@@ -12,7 +12,7 @@
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires PHP: 5.6
  * Requires At Least: 4.4
- * Tested Up To: 5.5.1
+ * Tested Up To: 5.5.2
  * Version: 2.2.0
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
