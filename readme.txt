@@ -11,7 +11,7 @@ Contributors: jsmoriss
 Requires PHP: 7.0
 Requires At Least: 4.5
 Tested Up To: 5.6
-Stable Tag: 2.2.0
+Stable Tag: 2.3.0
 
 A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
@@ -47,7 +47,7 @@ define( 'WPFGC_SHORTCODE_NAME', 'include' );
 &#91;wpfgc url="http://example.com/dir/file.html"&#93;
 &#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
 &#91;wpfgc url="file://dir/file.html"&#93;
-&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filters" cache="600"&#93;
+&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;
 </pre>
 
 == Installation ==
