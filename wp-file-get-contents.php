@@ -124,7 +124,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			$add_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
-			$add_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . $atts[ 'class' ];			// Optional css class names.
+			$add_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional css class names.
 			$do_filter  = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Optional content filter.
 			$do_encode  = isset( $atts[ 'encode' ] ) ? self::get_bool( $atts[ 'encode' ] ) : true;	// Encode HTML entities (default is true).
 			$more_link  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
