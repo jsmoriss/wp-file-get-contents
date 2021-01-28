@@ -13,7 +13,7 @@
  * Requires PHP: 7.0
  * Requires At Least: 4.5
  * Tested Up To: 5.6
- * Version: 2.3.0-dev.3
+ * Version: 2.3.0-dev.4
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -172,7 +172,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			if ( $do_encode && function_exists( 'mb_convert_encoding' ) ) {
 
-				$content = mb_convert_encoding( $html, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
+				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
 			}
 
 			if ( $only_body && false !== stripos( $content, '<body' ) ) {
