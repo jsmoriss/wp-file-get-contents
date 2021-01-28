@@ -21,16 +21,17 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
 = Shortcode Attributes =
 
-* url = URL or file URI.
-* file = Path to a local file (relative to the wp-content/ folder).
-* cache = Number of seconds to cache the content in the transient cache (defaults is 3600 seconds).
-* pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
+* body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
+* cache = Number of seconds to cache the contents (defaults is 3600 seconds).
 * class = Wrap the content in the specified div class (default is none).
+* encode = Encode HTML entities (default is true).
+* file = Path to a local file (relative to the wp-content/ folder).
 * filter = Apply the specified filter to the content (default is none).
 * more = Add more link on non-singular web pages (default is true).
-* body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
+* pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
+* url = URL or file URI.
 
-**Note that all local file paths are relative to the wp-content/ folder** &mdash; you cannot include files from outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
+**Note that all local file paths are relative to the wp-content/ folder** &mdash; you cannot include files outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is stripped from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
@@ -95,6 +96,20 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
+**Version 2.3.0-dev.3 (2021/01/28)**
+
+* **New Features**
+	* Added the 'encode' shortcode attribute (default is true).
+* **Improvements**
+	* None.
+* **Bugfixes**
+	* None.
+* **Developer Notes**
+	* None.
+* **Requires At Least**
+	* PHP v7.0.
+	* WordPress v4.5.
+
 **Version 2.2.0 (2020/10/07)**
 
 Maintenance release.
@@ -112,6 +127,10 @@ Maintenance release.
 	* WordPress v4.5.
 
 == Upgrade Notice ==
+
+= 2.3.0-dev.3 =
+
+(2021/01/28) Added the 'encode' shortcode attribute (default is true).
 
 = 2.2.0 =
 
