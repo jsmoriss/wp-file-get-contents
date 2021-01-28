@@ -13,7 +13,7 @@
  * Requires PHP: 7.0
  * Requires At Least: 4.5
  * Tested Up To: 5.6
- * Version: 2.3.0-dev.4
+ * Version: 2.3.0
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -123,38 +123,40 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$atts = array();
 			}
 
-			$add_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
-			$add_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional css class names.
-			$do_filter  = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Optional content filter.
-			$do_encode  = isset( $atts[ 'encode' ] ) ? self::get_bool( $atts[ 'encode' ] ) : true;	// Encode HTML entities (default is true).
-			$more_link  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
-			$only_body  = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;	// Keep only <body></body> content.
-			$cache_secs = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;		// Allow for 0 seconds (default 1 hour).
-
 			/**
 			 * Determine the url / file name to retrieve.
 			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
 
-				$url = $atts[ 'url' ];
+				$do_url = $atts[ 'url' ];
 
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
 
-				$url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
+				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
 
 			} elseif ( ! empty( $atts[ 'file' ] ) ) {
 
-				$url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
+				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
 
 			} else {
 
-				return '<p>' . __CLASS__ . ': <em><code>url</code> or <code>file</code> shortcode attribute missing</em>.</p>';
+				$error_msg = sprintf( __( '%1$s or %2$s shortcode attribute missing.', 'wp-file-get-contents' ), '<code>url</code>', '<code>file</code>' );
+
+				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
 			}
 
-			$cache_salt = __METHOD__ . '(url:' . $url . ')';
+			$do_body   = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;	// Keep only <body></body> content.
+			$do_cache  = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;			// Allow for 0 seconds (default 1 hour).
+			$do_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional css class names.
+			$do_filter = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Optional content filter name.
+			$do_more   = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
+			$do_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
+			$do_utf8   = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;	// Convert UTF-8 to HTML entities (default is true).
+
+			$cache_salt = __METHOD__ . '(url:' . $do_url . ')';
 			$cache_id   = __CLASS__ . '_' . md5( $cache_salt );
 
-			if ( ! $this->cache_disabled && $cache_secs > 0 ) {
+			if ( ! $this->cache_disabled && $do_cache > 0 ) {
 
 				$content = get_transient( $cache_id );
 
@@ -168,19 +170,19 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				delete_transient( $cache_id );
 			}
 
-			$content = file_get_contents( $url );
+			$content = file_get_contents( $do_url );
 
-			if ( $do_encode && function_exists( 'mb_convert_encoding' ) ) {
+			if ( $do_utf8 && function_exists( 'mb_convert_encoding' ) ) {
 
 				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
 			}
 
-			if ( $only_body && false !== stripos( $content, '<body' ) ) {
+			if ( $do_body && false !== stripos( $content, '<body' ) ) {
 
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 			}
 
-			if ( $more_link && ! is_singular() ) {
+			if ( $do_more && ! is_singular() ) {
 
 				global $post;
 
@@ -200,12 +202,12 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
-			if ( $add_pre ) {
+			if ( $do_pre ) {
 			
 				$content = "<pre>\n" . $content . "</pre>\n";
 			}
 
-			$content = '<div class="wp_file_get_contents wpfgc' . $add_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
+			$content = '<div class="wp_file_get_contents wpfgc' . $do_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
 
 			if ( $do_filter ) {
 
@@ -216,9 +218,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$this->add_shortcodes();
 			}
 
-			if ( $cache_secs > 0 ) {
+			if ( $do_cache > 0 ) {
 
-				set_transient( $cache_id, $content, $cache_secs );	// Save rendered content.
+				set_transient( $cache_id, $content, $do_cache );	// Save rendered content.
 			}
 
 			return $content;
