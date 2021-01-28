@@ -96,7 +96,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 2.3.0-dev.3 (2021/01/28)**
+**Version 2.3.0-dev.4 (2021/01/28)**
 
 * **New Features**
 	* Added the 'encode' shortcode attribute (default is true).
@@ -128,7 +128,7 @@ Maintenance release.
 
 == Upgrade Notice ==
 
-= 2.3.0-dev.3 =
+= 2.3.0-dev.4 =
 
 (2021/01/28) Added the 'encode' shortcode attribute (default is true).
 
