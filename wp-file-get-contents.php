@@ -13,7 +13,7 @@
  * Requires PHP: 7.0
  * Requires At Least: 4.5
  * Tested Up To: 5.6
- * Version: 2.2.0
+ * Version: 2.3.0-dev.3
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -126,6 +126,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$add_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
 			$add_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . $atts[ 'class' ];			// Optional css class names.
 			$do_filter  = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Optional content filter.
+			$do_encode  = isset( $atts[ 'encode' ] ) ? self::get_bool( $atts[ 'encode' ] ) : true;	// Encode HTML entities (default is true).
 			$more_link  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
 			$only_body  = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;	// Keep only <body></body> content.
 			$cache_secs = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;		// Allow for 0 seconds (default 1 hour).
@@ -139,11 +140,11 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
 
-				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
+				$url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
 
 			} elseif ( ! empty( $atts[ 'file' ] ) ) {
 
-				$url = trailingslashit( WP_CONTENT_DIR ).preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
+				$url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
 
 			} else {
 
@@ -163,10 +164,16 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 
 			} else {
+
 				delete_transient( $cache_id );
 			}
 
 			$content = file_get_contents( $url );
+
+			if ( $do_encode && function_exists( 'mb_convert_encoding' ) ) {
+
+				$content = mb_convert_encoding( $html, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
+			}
 
 			if ( $only_body && false !== stripos( $content, '<body' ) ) {
 
@@ -181,9 +188,11 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 				if ( $parts[ 'more_text' ] ) {
 
-					$content = $parts[ 'main' ] . apply_filters( 'the_content_more_link',
-						' <a href="' . get_permalink() . '#more-{' . $post->ID . '}" class="more-link">' . $parts[ 'more_text' ] . '</a>',
-							$parts[ 'more_text' ] );
+					$more_link = sprintf( ' <a href="%s#more-{%s}" class="more-link">%s</a>', get_permalink(), $post->ID, $parts[ 'more_text' ] );
+
+					$more_link = apply_filters( 'the_content_more_link', $more_link, $parts[ 'more_text' ] );
+
+					$content = $parts[ 'main' ] . $more_link;
 
 				} else {
 
@@ -191,13 +200,16 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
-			$content = '<div class="wp_file_get_contents wpfgc' . $add_class . '">' . "\n" . 
-				( $add_pre ? "<pre>\n" : '' ) . $content . ( $add_pre ? "</pre>\n" : '' ) . 
-					'</div><!-- .wp_file_get_contents -->' . "\n";
+			if ( $add_pre ) {
+			
+				$content = "<pre>\n" . $content . "</pre>\n";
+			}
+
+			$content = '<div class="wp_file_get_contents wpfgc' . $add_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
 
 			if ( $do_filter ) {
 
-				$this->remove_shortcodes();	// Just in case - prevent recursion.
+				$this->remove_shortcodes();	// Just in case, to prevent recursion.
 
 				$content = apply_filters( $do_filter, $content );
 
