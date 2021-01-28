@@ -24,12 +24,12 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 * cache = Number of seconds to cache the contents (defaults is 3600 seconds).
 * class = Wrap the content in the specified div class (default is none).
-* encode = Encode HTML entities (default is true).
 * file = Path to a local file (relative to the wp-content/ folder).
 * filter = Apply the specified filter to the content (default is none).
 * more = Add more link on non-singular web pages (default is true).
 * pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
 * url = URL or file URI.
+* utf8 = Encode HTML entities (default is true).
 
 **Note that all local file paths are relative to the wp-content/ folder** &mdash; you cannot include files outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is stripped from file paths to prevent backing out of the wp-content/ folder.
 
@@ -96,10 +96,10 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 2.3.0-dev.4 (2021/01/28)**
+**Version 2.3.0 (2021/01/28)**
 
 * **New Features**
-	* Added the 'encode' shortcode attribute (default is true).
+	* Added the 'utf8' shortcode attribute (default is true).
 * **Improvements**
 	* None.
 * **Bugfixes**
@@ -128,9 +128,9 @@ Maintenance release.
 
 == Upgrade Notice ==
 
-= 2.3.0-dev.4 =
+= 2.3.0 =
 
-(2021/01/28) Added the 'encode' shortcode attribute (default is true).
+(2021/01/28) Added the 'utf8' shortcode attribute (default is true).
 
 = 2.2.0 =
 
