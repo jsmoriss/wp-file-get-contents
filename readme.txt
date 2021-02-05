@@ -37,18 +37,18 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
 The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to add an additional custom shortcode name (the default shortcode names are 'wp-file-get-contents' and 'wpfgc').
 
-<pre>
-define( 'WPFGC_SHORTCODE_NAME', 'include' );
-</pre>
+<pre>define( 'WPFGC_SHORTCODE_NAME', 'include' );</pre>
 
 = Shortcode Examples =
 
-<pre>
-&#91;wpfgc url="http://example.com/dir/file.html"&#93;
+<pre>&#91;wpfgc url="http://example.com/dir/file.html"&#93;
 &#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
 &#91;wpfgc url="file://dir/file.html"&#93;
-&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;
-</pre>
+&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;</pre>
+
+= Need a Boost to your Social and Search Ranking? =
+
+Check out [the WPSSO Core plugin](https://wordpress.org/plugins/wpsso/) to present your content at its best on social sites and in search results, no matter how webpages are shared, re-shared, messaged, posted, embedded, or crawled.
 
 == Installation ==
 
