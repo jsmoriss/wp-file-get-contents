@@ -235,6 +235,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				case 'future':
 				case 'private':
 				case 'publish':
+				case 'expired':
 
 					$is_admin = is_admin();
 
