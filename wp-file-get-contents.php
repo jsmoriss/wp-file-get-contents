@@ -34,7 +34,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 	class WPFGC {
 
-		private $cache_enabled = true;
+		private $cache_disabled = false;	// Signal to clear and re-create the cache object.
 
 		private $shortcode_names = array(
 			'wp-file-get-contents',
@@ -145,32 +145,28 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
 			}
 
-			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;		// Keep only <body></body> content (default is true).
-			$do_cache    = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;			// Allow for 0 seconds (default 1 hour).
-			$do_class    = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
-			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;	// Escape HTML characters (default is false).
-			$do_filter   = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Apply content filter name (default is 'wpfgc_content').
-			$do_more     = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
-			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;		// Wrap content in pre tags (default is false).
-			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;		// Convert UTF-8 to HTML entities (default is true).
-
-			unset( $atts[ 'cache' ], $atts[ 'class' ], $atts[ 'more' ] );	// Not relevant for cache salt.
+			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
+			$do_cache    = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;
+			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;
+			$do_filter   = isset( $atts[ 'filter' ] ) ? sanitize_text_field( $atts[ 'filter' ] ) : 'wpfgc_content';
+			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
+			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
 
 			$cache_salt = __METHOD__ . '_' . $this->get_atts_salt( $atts );
 			$cache_id   = __CLASS__ . '_' . md5( $cache_salt );
 
-			if ( $this->cache_enabled && $do_cache > 0 ) {
+			if ( $this->cache_disabled ) {	// Signal to clear and re-create the cache object.
+
+				delete_transient( $cache_id );
+
+			} elseif ( $do_cache ) {
 
 				$content = get_transient( $cache_id );
 
 				if ( false !== $content ) {
 
-					return $content;
+					return $this->format_content( $content, $atts );
 				}
-
-			} else {
-
-				delete_transient( $cache_id );
 			}
 
 			$content = file_get_contents( $do_url );
@@ -222,13 +218,28 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			/**
 			 * Maybe cache the content (default is 1 hour).
 			 */
-			if ( $do_cache > 0 ) {
+			if ( $do_cache ) {
 
 				set_transient( $cache_id, $content, $do_cache );	// Save rendered content.
 			}
 
+			return $this->format_content( $content, $atts );
+		}
+
+		public function get_atts_salt( $atts ) {
+
+			unset( $atts[ 'cache' ], $atts[ 'class' ], $atts[ 'more' ] );	// Not relevant for cache salt.
+
+			return implode( '_', array_map( function( $k, $v ) { return $k . ':' . $v; }, array_keys( $atts ), array_values( $atts ) ) );
+		}
+
+		public function format_content( $content, $atts ) {
+
+			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
+			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
+
 			/**
-			 * Maybe add more link dynamically (default is true).
+			 * Maybe add a more link (default is true).
 			 */
 			if ( $do_more && ! is_singular() ) {
 
@@ -255,11 +266,6 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			return $content;
 		}
 
-		public function get_atts_salt( $atts ) {
-
-			return implode( '_', array_map( function( $k, $v ) { return $k . ':' . $v; }, array_keys( $atts ), array_values( $atts ) ) );
-		}
-
 		public function clear_post_cache( $post_id, $rel_id = false ) {
 
 			switch ( get_post_status( $post_id ) ) {
@@ -281,7 +287,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 							if ( false !== stripos( $post_obj->post_content, '[' . $name ) ) {
 
-								$this->cache_enabled = false;	// Clear cache and return.
+								$this->cache_disabled = true;	// Signal to clear and re-create the cache object.
 
 								$content = do_shortcode( $post_obj->post_content );
 
