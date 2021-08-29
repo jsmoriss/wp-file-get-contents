@@ -145,21 +145,20 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
 			}
 
+			$cache_salt  = __METHOD__ . '_' . $this->get_atts_salt( $atts );
+			$cache_id    = __CLASS__ . '_' . md5( $cache_salt );
+			$cache_exp   = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;
 			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
-			$do_cache    = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;
 			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;
 			$do_filter   = isset( $atts[ 'filter' ] ) ? sanitize_text_field( $atts[ 'filter' ] ) : 'wpfgc_content';
 			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
 			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
 
-			$cache_salt = __METHOD__ . '_' . $this->get_atts_salt( $atts );
-			$cache_id   = __CLASS__ . '_' . md5( $cache_salt );
-
 			if ( $this->cache_disabled ) {	// Signal to clear and re-create the cache object.
 
 				delete_transient( $cache_id );
 
-			} elseif ( $do_cache ) {
+			} elseif ( $cache_exp ) {
 
 				$content = get_transient( $cache_id );
 
@@ -180,19 +179,19 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			/**
-			 * Maybe convert UTF-8 to HTML entities (default is true).
-			 */
-			if ( $do_utf8 && function_exists( 'mb_convert_encoding' ) ) {
-
-				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
-			}
-
-			/**
 			 * Maybe escape HTML characters (default is false).
 			 */
 			if ( $do_esc_html ) {
 
 				$content = esc_html( $content );
+			}
+
+			/**
+			 * Maybe convert UTF-8 to HTML entities (default is true).
+			 */
+			if ( $do_utf8 && function_exists( 'mb_convert_encoding' ) ) {
+
+				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
 			}
 
 			/**
@@ -218,54 +217,17 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			/**
 			 * Maybe cache the content (default is 1 hour).
 			 */
-			if ( $do_cache ) {
+			if ( $cache_exp ) {
 
-				set_transient( $cache_id, $content, $do_cache );	// Save rendered content.
+				set_transient( $cache_id, $content, $cache_exp );	// Save rendered content.
 			}
 
 			return $this->format_content( $content, $atts );
 		}
 
-		public function get_atts_salt( $atts ) {
-
-			unset( $atts[ 'cache' ], $atts[ 'class' ], $atts[ 'more' ] );	// Not relevant for cache salt.
-
-			return implode( '_', array_map( function( $k, $v ) { return $k . ':' . $v; }, array_keys( $atts ), array_values( $atts ) ) );
-		}
-
-		public function format_content( $content, $atts ) {
-
-			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
-			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
-
-			/**
-			 * Maybe add a more link (default is true).
-			 */
-			if ( $do_more && ! is_singular() ) {
-
-				global $post;
-
-				$parts = get_extended( $content );
-
-				if ( $parts[ 'more_text' ] ) {
-
-					$more_link = sprintf( ' <a href="%s#more-{%s}" class="more-link">%s</a>', get_permalink(), $post->ID, $parts[ 'more_text' ] );
-
-					$more_link = apply_filters( 'the_content_more_link', $more_link, $parts[ 'more_text' ] );
-
-					$content = $parts[ 'main' ] . $more_link;
-
-				} else {
-
-					$content = $parts[ 'main' ];
-				}
-			}
-
-			$content = '<div class="wp_file_get_contents wpfgc' . $do_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
-
-			return $content;
-		}
-
+		/**
+		 * Hooked to the 'save_post' action.
+		 */
 		public function clear_post_cache( $post_id, $rel_id = false ) {
 
 			switch ( get_post_status( $post_id ) ) {
@@ -300,6 +262,46 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			return $post_id;
+		}
+
+		private function get_atts_salt( $atts ) {
+
+			unset( $atts[ 'cache' ], $atts[ 'class' ], $atts[ 'more' ] );	// Not relevant for cache salt.
+
+			return implode( '_', array_map( function( $k, $v ) { return $k . ':' . $v; }, array_keys( $atts ), array_values( $atts ) ) );
+		}
+
+		private function format_content( $content, $atts ) {
+
+			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
+			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
+
+			/**
+			 * Maybe add a more link (default is true).
+			 */
+			if ( $do_more && ! is_singular() ) {
+
+				global $post;
+
+				$parts = get_extended( $content );
+
+				if ( $parts[ 'more_text' ] ) {
+
+					$more_link = sprintf( ' <a href="%s#more-{%s}" class="more-link">%s</a>', get_permalink(), $post->ID, $parts[ 'more_text' ] );
+
+					$more_link = apply_filters( 'the_content_more_link', $more_link, $parts[ 'more_text' ] );
+
+					$content = $parts[ 'main' ] . $more_link;
+
+				} else {
+
+					$content = $parts[ 'main' ];
+				}
+			}
+
+			$content = '<div class="wp_file_get_contents wpfgc' . $do_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
+
+			return $content;
 		}
 
 		/**
