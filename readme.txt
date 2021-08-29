@@ -24,6 +24,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 * cache = Number of seconds to cache the contents (defaults is 3600 seconds).
 * class = Wrap the content in the specified div class (default is none).
+* esc_html = Escape HTML characters (default is false).
 * file = Path to a local file (relative to the wp-content/ folder).
 * filter = Apply the specified filter to the content (default is none).
 * more = Add more link on non-singular web pages (default is true).
@@ -96,6 +97,20 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
+**Version 2.4.0 (2021/08/29)**
+
+* **New Features**
+	* Added the 'esc_html' shortcode attribute (default is false).
+* **Improvements**
+	* None.
+* **Bugfixes**
+	* None.
+* **Developer Notes**
+	* None.
+* **Requires At Least**
+	* PHP v7.0.
+	* WordPress v5.0.
+
 **Version 2.3.0 (2021/01/28)**
 
 * **New Features**
@@ -110,29 +125,13 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* PHP v7.0.
 	* WordPress v5.0.
 
-**Version 2.2.0 (2020/10/07)**
-
-Maintenance release.
-
-* **New Features**
-	* None.
-* **Improvements**
-	* None.
-* **Bugfixes**
-	* None.
-* **Developer Notes**
-	* None.
-* **Requires At Least**
-	* PHP v7.0.
-	* WordPress v4.5.
-
 == Upgrade Notice ==
+
+= 2.4.0 =
+
+(2021/08/29) Added the 'esc_html' shortcode attribute (default is false).
 
 = 2.3.0 =
 
 (2021/01/28) Added the 'utf8' shortcode attribute (default is true).
-
-= 2.2.0 =
-
-(2020/10/07) Maintenance release.
 
