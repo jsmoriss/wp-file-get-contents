@@ -102,11 +102,12 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 * **New Features**
 	* Added the 'esc_html' shortcode attribute (default is false).
 * **Improvements**
-	* None.
+	* Improved the creation of a unique transient cache salt string.
 * **Bugfixes**
-	* None.
+	* Fixed caching of content incorrectly formatted with more link.
 * **Developer Notes**
-	* None.
+	* Added a `WPFGC->get_atts_salt()` method.
+	* Added a `WPFGC->format_content()` method.
 * **Requires At Least**
 	* PHP v7.0.
 	* WordPress v5.0.
@@ -129,7 +130,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 = 2.4.0 =
 
-(2021/08/29) Added the 'esc_html' shortcode attribute (default is false).
+(2021/08/29) Added the 'esc_html' shortcode attribute (default is false). Fixed caching of content incorrectly formatted with more link.
 
 = 2.3.0 =
 
