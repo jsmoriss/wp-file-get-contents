@@ -283,7 +283,6 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 								$this->cache_enabled = false;	// Clear cache and return.
 
-error_log( __METHOD__ );
 								$content = do_shortcode( $post_obj->post_content );
 
 								break;	// Stop after first shortcode match.
