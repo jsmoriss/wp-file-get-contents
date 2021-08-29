@@ -13,7 +13,7 @@
  * Requires PHP: 7.0
  * Requires At Least: 5.0
  * Tested Up To: 5.8
- * Version: 2.3.0
+ * Version: 2.4.0
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -34,7 +34,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 	class WPFGC {
 
-		private $cache_disabled = false;
+		private $cache_enabled = true;
 
 		private $shortcode_names = array(
 			'wp-file-get-contents',
@@ -145,18 +145,21 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
 			}
 
-			$do_body   = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;	// Keep only <body></body> content.
-			$do_cache  = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;			// Allow for 0 seconds (default 1 hour).
-			$do_class  = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional css class names.
-			$do_filter = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Optional content filter name.
-			$do_more   = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
-			$do_pre    = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;	// Wrap content in pre tags (default is false).
-			$do_utf8   = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;	// Convert UTF-8 to HTML entities (default is true).
+			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;		// Keep only <body></body> content (default is true).
+			$do_cache    = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;			// Allow for 0 seconds (default 1 hour).
+			$do_class    = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
+			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;	// Escape HTML characters (default is false).
+			$do_filter   = isset( $atts[ 'filter' ] ) ? $atts[ 'filter' ] : 'wpfgc_content';		// Apply content filter name (default is 'wpfgc_content').
+			$do_more     = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
+			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;		// Wrap content in pre tags (default is false).
+			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;		// Convert UTF-8 to HTML entities (default is true).
 
-			$cache_salt = __METHOD__ . '(url:' . $do_url . ')';
+			unset( $atts[ 'cache' ], $atts[ 'class' ], $atts[ 'more' ] );	// Not relevant for cache salt.
+
+			$cache_salt = __METHOD__ . '_' . $this->get_atts_salt( $atts );
 			$cache_id   = __CLASS__ . '_' . md5( $cache_salt );
 
-			if ( ! $this->cache_disabled && $do_cache > 0 ) {
+			if ( $this->cache_enabled && $do_cache > 0 ) {
 
 				$content = get_transient( $cache_id );
 
@@ -172,16 +175,61 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			$content = file_get_contents( $do_url );
 
-			if ( $do_utf8 && function_exists( 'mb_convert_encoding' ) ) {
-
-				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
-			}
-
+			/**
+			 * Maybe keep only <body></body> content (default is true).
+			 */
 			if ( $do_body && false !== stripos( $content, '<body' ) ) {
 
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 			}
 
+			/**
+			 * Maybe convert UTF-8 to HTML entities (default is true).
+			 */
+			if ( $do_utf8 && function_exists( 'mb_convert_encoding' ) ) {
+
+				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
+			}
+
+			/**
+			 * Maybe escape HTML characters (default is false).
+			 */
+			if ( $do_esc_html ) {
+
+				$content = esc_html( $content );
+			}
+
+			/**
+			 * Mrap content in pre tags (default is false).
+			 */
+			if ( $do_pre ) {
+
+				$content = '<pre>' . "\n" . $content . '</pre>' . "\n";
+			}
+
+			/**
+			 * Apply content filter name (default is 'wpfgc_content').
+			 */
+			if ( $do_filter ) {
+
+				$this->remove_shortcodes();	// Just in case, to prevent recursion.
+
+				$content = apply_filters( $do_filter, $content );
+
+				$this->add_shortcodes();
+			}
+
+			/**
+			 * Maybe cache the content (default is 1 hour).
+			 */
+			if ( $do_cache > 0 ) {
+
+				set_transient( $cache_id, $content, $do_cache );	// Save rendered content.
+			}
+
+			/**
+			 * Maybe add more link dynamically (default is true).
+			 */
 			if ( $do_more && ! is_singular() ) {
 
 				global $post;
@@ -202,28 +250,14 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
-			if ( $do_pre ) {
-
-				$content = "<pre>\n" . $content . "</pre>\n";
-			}
-
 			$content = '<div class="wp_file_get_contents wpfgc' . $do_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
 
-			if ( $do_filter ) {
-
-				$this->remove_shortcodes();	// Just in case, to prevent recursion.
-
-				$content = apply_filters( $do_filter, $content );
-
-				$this->add_shortcodes();
-			}
-
-			if ( $do_cache > 0 ) {
-
-				set_transient( $cache_id, $content, $do_cache );	// Save rendered content.
-			}
-
 			return $content;
+		}
+
+		public function get_atts_salt( $atts ) {
+
+			return implode( '_', array_map( function( $k, $v ) { return $k . ':' . $v; }, array_keys( $atts ), array_values( $atts ) ) );
 		}
 
 		public function clear_post_cache( $post_id, $rel_id = false ) {
@@ -247,8 +281,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 							if ( false !== stripos( $post_obj->post_content, '[' . $name ) ) {
 
-								$this->cache_disabled = true;	// Clear cache and return.
+								$this->cache_enabled = false;	// Clear cache and return.
 
+error_log( __METHOD__ );
 								$content = do_shortcode( $post_obj->post_content );
 
 								break;	// Stop after first shortcode match.
