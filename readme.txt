@@ -49,7 +49,7 @@ The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to a
 
 = Need a Boost to your Social and Search Ranking? =
 
-Check out [the WPSSO Core plugin](https://wordpress.org/plugins/wpsso/) to rank higher and improve click-through-rates by presenting your content at its best on social sites and in search results - no matter how URLs are shared, re-shared, messaged, posted, embedded, or crawled.
+Check out [the WPSSO Core plugin](https://wordpress.org/plugins/wpsso/) to rank higher and improve click through rates by presenting your content at its best on social sites and in search results - no matter how URLs are shared, re-shared, messaged, posted, embedded, or crawled.
 
 == Installation ==
 
