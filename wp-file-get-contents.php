@@ -240,7 +240,6 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				case 'expired':
 
 					$is_admin = is_admin();
-
 					$post_obj = get_post( $post_id, OBJECT, 'raw' );
 
 					if ( isset( $post_obj->post_content ) ) {	// Just in case.
