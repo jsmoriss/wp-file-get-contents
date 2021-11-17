@@ -47,10 +47,6 @@ The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to a
 &#91;wpfgc url="file://dir/file.html"&#93;
 &#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;</pre>
 
-= Need a Boost to your Social and Search Ranking? =
-
-[WPSSO is an advanced structured data plugin for WordPress SEO and SMO](https://wordpress.org/plugins/wpsso/) that helps you rank higher and improves click through rates by presenting your content at its best in **search results** and on **social sites** - no matter how URLs are shared, reshared, messaged, posted, embedded, or crawled.
-
 == Installation ==
 
 = Automated Install =
