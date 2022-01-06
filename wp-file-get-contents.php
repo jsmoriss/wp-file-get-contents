@@ -12,7 +12,7 @@
  * Description: A WordPress shortcode for PHP's file_get_contents()
  * Requires PHP: 7.2
  * Requires At Least: 5.2
- * Tested Up To: 5.8.2
+ * Tested Up To: 5.8.3
  * Version: 2.4.0
  * 
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
@@ -22,7 +22,7 @@
  *      {bugfix}        Backwards-compatible bug fixes or small improvements.
  *      {stage}.{level} Pre-production release: dev < a (alpha) < b (beta) < rc (release candidate).
  *
- * Copyright 2012-2021 Jean-Sebastien Morisset (https://surniaulula.com/)
+ * Copyright 2012-2022 Jean-Sebastien Morisset (https://surniaulula.com/)
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
