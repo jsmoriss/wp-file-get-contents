@@ -10,7 +10,7 @@ Tags: file_get_contents, shortcode, include, file, url, body, content
 Contributors: jsmoriss
 Requires PHP: 7.2
 Requires At Least: 5.2
-Tested Up To: 5.8.2
+Tested Up To: 5.8.3
 Stable Tag: 2.4.0
 
 A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
