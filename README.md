@@ -46,7 +46,6 @@
 &#91;wpfgc url="file://dir/file.html"&#93;
 &#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;</pre>
 
-
 <h2>Installation</h2>
 
 <h4>Automated Install</h4>
@@ -74,10 +73,4 @@
 <li>Click on the <em>Install Now</em> button.</li>
 <li>Click the <em>Activate Plugin</em> link.</li>
 </ol>
-
-
-<h2>Frequently Asked Questions</h2>
-
-
-
 
