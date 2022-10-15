@@ -14,7 +14,7 @@
  * Requires At Least: 5.2
  * Tested Up To: 6.1.0
  * Version: 2.4.0
- * 
+ *
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
  *      {major}         Major structural code changes and/or incompatible API changes (ie. breaking changes).
