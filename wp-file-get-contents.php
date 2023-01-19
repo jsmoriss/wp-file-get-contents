@@ -47,7 +47,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			add_action( 'plugins_loaded', array( $this, 'init_textdomain' ) );
 
-			/**
+			/*
 			 * Allow for an additional custom shortcode name.
 			 */
 			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME ) {
@@ -123,7 +123,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$atts = array();
 			}
 
-			/**
+			/*
 			 * Determine the url / file name to retrieve.
 			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
@@ -170,7 +170,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			$content = file_get_contents( $do_url );
 
-			/**
+			/*
 			 * Maybe keep only <body></body> content (default is true).
 			 */
 			if ( $do_body && false !== stripos( $content, '<body' ) ) {
@@ -178,7 +178,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$content = preg_replace( '/^.*<body[^>]*>(.*)<\/body>.*$/is', '$1', $content );
 			}
 
-			/**
+			/*
 			 * Maybe escape HTML characters (default is false).
 			 */
 			if ( $do_esc_html ) {
@@ -186,7 +186,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$content = esc_html( $content );
 			}
 
-			/**
+			/*
 			 * Maybe convert UTF-8 to HTML entities (default is true).
 			 */
 			if ( $do_utf8 && function_exists( 'mb_convert_encoding' ) ) {
@@ -194,7 +194,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$content = mb_convert_encoding( $content, $to_encoding = 'HTML-ENTITIES', $from_encoding = 'UTF-8' );
 			}
 
-			/**
+			/*
 			 * Mrap content in pre tags (default is false).
 			 */
 			if ( $do_pre ) {
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$content = '<pre>' . "\n" . $content . '</pre>' . "\n";
 			}
 
-			/**
+			/*
 			 * Apply content filter name (default is 'wpfgc_content').
 			 */
 			if ( $do_filter ) {
@@ -214,7 +214,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$this->add_shortcodes();
 			}
 
-			/**
+			/*
 			 * Maybe cache the content (default is 1 hour).
 			 */
 			if ( $cache_exp ) {
@@ -225,7 +225,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			return $this->format_content( $content, $atts );
 		}
 
-		/**
+		/*
 		 * Hooked to the 'save_post' action.
 		 */
 		public function clear_post_cache( $post_id, $rel_id = false ) {
@@ -275,7 +275,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
 			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
 
-			/**
+			/*
 			 * Maybe add a more link (default is true).
 			 */
 			if ( $do_more && ! is_singular() ) {
@@ -303,7 +303,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			return $content;
 		}
 
-		/**
+		/*
 		 * Converts string to boolean.
 		 */
 		private static function get_bool( $mixed ) {
