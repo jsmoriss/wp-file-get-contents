@@ -8,7 +8,7 @@ License URI: https://www.gnu.org/licenses/gpl.txt
 Assets URI: https://jsmoriss.github.io/wp-file-get-contents/assets/
 Tags: file_get_contents, shortcode, include, file, url, body, content
 Contributors: jsmoriss
-Requires PHP: 7.2
+Requires PHP: 7.2.5
 Requires At Least: 5.5
 Tested Up To: 6.2.0
 Stable Tag: 2.4.0
@@ -83,7 +83,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* Added a `WPFGC->get_atts_salt()` method.
 	* Added a `WPFGC->format_content()` method.
 * **Requires At Least**
-	* PHP v7.2.
+	* PHP v7.2.5.
 	* WordPress v5.5.
 
 **Version 2.3.0 (2021/01/28)**
