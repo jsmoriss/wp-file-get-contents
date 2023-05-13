@@ -28,6 +28,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * file = Path to a local file (relative to the wp-content/ folder).
 * filter = Apply the specified filter to the content (default is none).
 * more = Add more link on non-singular web pages (default is true).
+* code = Wrap the content in &lt;code&gt;&lt;/code&gt; HTML tags (default is false).
 * pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
 * url = URL or file URI.
 * utf8 = Encode HTML entities (default is true).
@@ -71,6 +72,20 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
+**Version 2.5.0 (2023/05/13)**
+
+* **New Features**
+	* Added the 'code' shortcode attribute (default is false).
+* **Improvements**
+	* None.
+* **Bugfixes**
+	* None.
+* **Developer Notes**
+	* None.
+* **Requires At Least**
+	* PHP v7.2.5.
+	* WordPress v5.5.
+
 **Version 2.4.0 (2021/08/29)**
 
 * **New Features**
@@ -101,6 +116,10 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* WordPress v5.0.
 
 == Upgrade Notice ==
+
+= 2.5.0 =
+
+(2023/05/13) Added the 'code' shortcode attribute (default is false).
 
 = 2.4.0 =
 
