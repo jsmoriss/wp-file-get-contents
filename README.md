@@ -22,12 +22,13 @@
 <li>body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).</li>
 <li>cache = Number of seconds to cache the contents (defaults is 3600 seconds).</li>
 <li>class = Wrap the content in the specified div class (default is none).</li>
+<li>code = Wrap the content in &lt;code&gt;&lt;/code&gt; HTML tags (default is false).</li>
 <li>esc_html = Escape HTML characters (default is false).</li>
 <li>file = Path to a local file (relative to the wp-content/ folder).</li>
 <li>filter = Apply the specified filter to the content (default is none).</li>
 <li>more = Add more link on non-singular web pages (default is true).</li>
-<li>code = Wrap the content in &lt;code&gt;&lt;/code&gt; HTML tags (default is false).</li>
 <li>pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).</li>
+<li>pre_code_esc_html = Escape HTML characters and wrap the content in &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; HTML tags (default is false).</li>
 <li>url = URL or file URI.</li>
 <li>utf8 = Encode HTML entities (default is true).</li>
 </ul>

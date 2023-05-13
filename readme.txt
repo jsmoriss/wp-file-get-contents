@@ -24,12 +24,13 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 * cache = Number of seconds to cache the contents (defaults is 3600 seconds).
 * class = Wrap the content in the specified div class (default is none).
+* code = Wrap the content in &lt;code&gt;&lt;/code&gt; HTML tags (default is false).
 * esc_html = Escape HTML characters (default is false).
 * file = Path to a local file (relative to the wp-content/ folder).
 * filter = Apply the specified filter to the content (default is none).
 * more = Add more link on non-singular web pages (default is true).
-* code = Wrap the content in &lt;code&gt;&lt;/code&gt; HTML tags (default is false).
 * pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
+* pre_code_esc_html = Escape HTML characters and wrap the content in &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; HTML tags (default is false).
 * url = URL or file URI.
 * utf8 = Encode HTML entities (default is true).
 
@@ -76,6 +77,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 * **New Features**
 	* Added the 'code' shortcode attribute (default is false).
+	* Added the 'pre_code_esc_html' shortcode attribute (default is false).
 * **Improvements**
 	* None.
 * **Bugfixes**
@@ -119,7 +121,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 = 2.5.0 =
 
-(2023/05/13) Added the 'code' shortcode attribute (default is false).
+(2023/05/13) Added the 'code' and 'pre_code_esc_html' shortcode attributes (default is false).
 
 = 2.4.0 =
 
