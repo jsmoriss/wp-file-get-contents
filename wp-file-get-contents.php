@@ -148,10 +148,12 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$cache_salt  = __METHOD__ . '_' . $this->get_atts_salt( $atts );
 			$cache_id    = __CLASS__ . '_' . md5( $cache_salt );
 			$cache_exp   = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;
+			$do_class    = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional div container class names.
+			$do_code     = isset( $atts[ 'code' ] ) ? self::get_bool( $atts[ 'code' ] ) : false;
 			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
 			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;
 			$do_filter   = isset( $atts[ 'filter' ] ) ? sanitize_text_field( $atts[ 'filter' ] ) : 'wpfgc_content';
-			$do_code     = isset( $atts[ 'code' ] ) ? self::get_bool( $atts[ 'code' ] ) : false;
+			$do_more     = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
 			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
 			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
 
@@ -288,8 +290,8 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		private function format_content( $content, $atts ) {
 
-			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );		// Optional css class names.
-			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;		// Add more link (default is true).
+			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional div container class names.
+			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
 
 			/*
 			 * Maybe add a more link (default is true).
