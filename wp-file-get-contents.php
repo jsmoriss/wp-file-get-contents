@@ -36,7 +36,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		private $cache_disabled = false;	// Signal to clear and re-create the cache object.
 
-		private $shortcode_names = array(
+		private $shortcode_names = array(	// Default list of shortcode names.
 			'wp-file-get-contents',
 			'wpfgc',
 		);
@@ -52,7 +52,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			 */
 			if ( defined( 'WPFGC_SHORTCODE_NAME' ) && WPFGC_SHORTCODE_NAME ) {
 
-				if ( ! in_array( WPFGC_SHORTCODE_NAME ) ) {	// Just in case.
+				if ( ! in_array( WPFGC_SHORTCODE_NAME, $this->shortcode_names ) ) {	// Just in case.
 
 					$this->shortcode_names[] = WPFGC_SHORTCODE_NAME;
 				}
