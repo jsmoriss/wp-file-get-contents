@@ -155,6 +155,13 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
 			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
 
+			if ( isset( $atts[ 'pre_code_esc_html' ] ) && self::get_bool( $atts[ 'pre_code_esc_html' ] ) ) {
+
+				$do_esc_html = true;
+				$do_pre      = true;
+				$do_code     = true;
+			}
+
 			if ( $this->cache_disabled ) {	// Signal to clear and re-create the cache object.
 
 				delete_transient( $cache_id );
