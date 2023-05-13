@@ -73,7 +73,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 2.5.0 (2023/05/13)**
+**Version 2.6.0 (2023/05/13)**
 
 * **New Features**
 	* Added the 'code' shortcode attribute (default is false).
@@ -88,46 +88,9 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* PHP v7.2.5.
 	* WordPress v5.5.
 
-**Version 2.4.0 (2021/08/29)**
-
-* **New Features**
-	* Added the 'esc_html' shortcode attribute (default is false).
-* **Improvements**
-	* Improved the creation of a unique transient cache salt string.
-* **Bugfixes**
-	* Fixed caching of content incorrectly formatted with more link.
-* **Developer Notes**
-	* Added a `WPFGC->get_atts_salt()` method.
-	* Added a `WPFGC->format_content()` method.
-* **Requires At Least**
-	* PHP v7.2.5.
-	* WordPress v5.5.
-
-**Version 2.3.0 (2021/01/28)**
-
-* **New Features**
-	* Added the 'utf8' shortcode attribute (default is true).
-* **Improvements**
-	* None.
-* **Bugfixes**
-	* None.
-* **Developer Notes**
-	* None.
-* **Requires At Least**
-	* PHP v7.0.
-	* WordPress v5.0.
-
 == Upgrade Notice ==
 
-= 2.5.0 =
+= 2.6.0 =
 
 (2023/05/13) Added the 'code' and 'pre_code_esc_html' shortcode attributes (default is false).
-
-= 2.4.0 =
-
-(2021/08/29) Added the 'esc_html' shortcode attribute (default is false). Fixed caching of content incorrectly formatted with more link.
-
-= 2.3.0 =
-
-(2021/01/28) Added the 'utf8' shortcode attribute (default is true).
 
