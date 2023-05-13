@@ -13,7 +13,7 @@
  * Requires PHP: 7.2.5
  * Requires At Least: 5.5
  * Tested Up To: 6.2.0
- * Version: 2.4.0
+ * Version: 2.5.0
  *
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -151,6 +151,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
 			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;
 			$do_filter   = isset( $atts[ 'filter' ] ) ? sanitize_text_field( $atts[ 'filter' ] ) : 'wpfgc_content';
+			$do_code     = isset( $atts[ 'code' ] ) ? self::get_bool( $atts[ 'code' ] ) : false;
 			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
 			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
 
@@ -195,7 +196,15 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			}
 
 			/*
-			 * Mrap content in pre tags (default is false).
+			 * Maybe wrap content in code tags before pre tags (default is false).
+			 */
+			if ( $do_code ) {
+
+				$content = '<code>' . "\n" . $content . '</code>' . "\n";
+			}
+
+			/*
+			 * Maybe wrap content in pre tags (default is false).
 			 */
 			if ( $do_pre ) {
 
