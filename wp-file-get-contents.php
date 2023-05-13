@@ -207,7 +207,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			 */
 			if ( $do_code ) {
 
-				$content = '<code>' . "\n" . $content . '</code>' . "\n";
+				$content = '<code>' . $content . '</code>';
 			}
 
 			/*
