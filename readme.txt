@@ -88,7 +88,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 2.7.0-dev.1 (2023/05/16)**
+**Version 2.7.0 (2023/05/16)**
 
 * **New Features**
 	* Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
@@ -119,7 +119,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 == Upgrade Notice ==
 
-= 2.7.0-dev.1 =
+= 2.7.0 =
 
 (2023/05/16) Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
 
