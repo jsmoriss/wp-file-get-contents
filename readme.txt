@@ -11,7 +11,7 @@ Contributors: jsmoriss
 Requires PHP: 7.2.5
 Requires At Least: 5.5
 Tested Up To: 6.2.0
-Stable Tag: 2.6.0
+Stable Tag: 2.7.0
 
 A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
@@ -102,28 +102,9 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* PHP v7.2.5.
 	* WordPress v5.5.
 
-**Version 2.6.0 (2023/05/13)**
-
-* **New Features**
-	* Added the 'code' shortcode attribute (default is false).
-	* Added the 'pre_code_esc_html' shortcode attribute (default is false).
-* **Improvements**
-	* None.
-* **Bugfixes**
-	* None.
-* **Developer Notes**
-	* None.
-* **Requires At Least**
-	* PHP v7.2.5.
-	* WordPress v5.5.
-
 == Upgrade Notice ==
 
 = 2.7.0 =
 
 (2023/05/16) Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
-
-= 2.6.0 =
-
-(2023/05/13) Added the 'code' and 'pre_code_esc_html' shortcode attributes (default is false).
 
