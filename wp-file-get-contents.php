@@ -145,6 +145,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
 			}
 
+			/*
+			 * For 'code_lang' and 'pre_lang' values see https://highlightjs.readthedocs.io/en/latest/supported-languages.html.
+			 */
 			$cache_salt           = __METHOD__ . '_' . $this->get_atts_salt( $atts );
 			$cache_id             = __CLASS__ . '_' . md5( $cache_salt );
 			$do_body              = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
