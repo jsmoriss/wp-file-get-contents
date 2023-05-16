@@ -1,7 +1,7 @@
-<h1>JSM&#039;s file_get_contents() Shortcode</h1>
+<h1>JSM file_get_contents() Shortcode</h1>
 
 <table>
-<tr><th align="right" valign="top" nowrap>Plugin Name</th><td>JSM&#039;s file_get_contents() Shortcode</td></tr>
+<tr><th align="right" valign="top" nowrap>Plugin Name</th><td>JSM file_get_contents() Shortcode</td></tr>
 <tr><th align="right" valign="top" nowrap>Summary</th><td>A safe and reliable WordPress shortcode for PHP&#039;s file_get_contents() function.</td></tr>
 <tr><th align="right" valign="top" nowrap>Stable Version</th><td>2.7.0</td></tr>
 <tr><th align="right" valign="top" nowrap>Requires PHP</th><td>7.2.5 or newer</td></tr>

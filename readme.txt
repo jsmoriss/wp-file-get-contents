@@ -1,5 +1,5 @@
-=== JSM's file_get_contents() Shortcode ===
-Plugin Name: JSM's file_get_contents() Shortcode
+=== JSM file_get_contents() Shortcode ===
+Plugin Name: JSM file_get_contents() Shortcode
 Plugin Slug: wp-file-get-contents
 Text Domain: wp-file-get-contents
 Domain Path: /languages
