@@ -40,7 +40,7 @@
 </ul>
 
 <blockquote>
-  <p><strong>Note that all local file paths are relative to the wp-content/ folder</strong> -- it is not possible to include files outside the wp-content/ folder. For example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are both read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.</p>
+  <p><strong>Note that all file paths (not URLs) are relative to the wp-content/ folder</strong> -- for security reasons, it is not possible to include files outside the wp-content/ folder. As an example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are both read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.</p>
 </blockquote>
 
 <h4>Shortcode Name</h4>

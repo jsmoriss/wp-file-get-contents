@@ -40,7 +40,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * url = URL or file URI.
 * utf8 = Encode HTML entities (default is true).
 
-> **Note that all local file paths are relative to the wp-content/ folder** -- it is not possible to include files outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
+> **Note that all file paths (not URLs) are relative to the wp-content/ folder** -- for security reasons, it is not possible to include files outside the wp-content/ folder. As an example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
