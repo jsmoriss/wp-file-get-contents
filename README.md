@@ -24,7 +24,7 @@
 <li>class = Add a class to the content 'div' container (default is none).</li>
 <li>code = Wrap the content in a &lt;code&gt;&lt;/code&gt; container (default is false).</li>
 <li>code_class = Add a class to the 'code' container (default is none).</li>
-<li>code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a class to the 'code' container (default is none).</li>
+<li>code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a language class to the 'code' container (default is none).</li>
 <li>esc_html = Escape HTML characters (default is false).</li>
 <li>esc_html_pre_code = Escape HTML characters and wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).</li>
 <li>file = Path to a local file (relative to the wp-content/ folder).</li>
@@ -33,7 +33,7 @@
 <li>pre = Wrap the content in a &lt;pre&gt;&lt;/pre&gt; container (default is false).</li>
 <li>pre_class = Add a class to the 'pre' container (default is none).</li>
 <li>pre_code = Wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).</li>
-<li>pre_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a class to the 'pre' container (default is none).</li>
+<li>pre_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a language class to the 'pre' container (default is none).</li>
 <li>pre_title = Add a title to the 'pre' container (default is none).</li>
 <li>url = URL or file URI.</li>
 <li>utf8 = Encode HTML entities (default is true).</li>
@@ -47,15 +47,21 @@
 
 <p>The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to add an additional custom shortcode name (the default shortcode names are 'wp-file-get-contents' and 'wpfgc').</p>
 
-<pre>define( 'WPFGC_SHORTCODE_NAME', 'include' );</pre>
+<pre><code>
+define( 'WPFGC_SHORTCODE_NAME', 'include' );
+</code></pre>
 
 <h4>Shortcode Examples</h4>
 
 <pre><code>
 &#91;wpfgc url="http://example.com/dir/file.html"&#93;
+
 &#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
+
 &#91;wpfgc url="file://dir/file.html"&#93;
+
 &#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;
+
 &#91;wpfgc file="examples/example-1.php" code_lang="php"&#93;
 </code></pre>
 

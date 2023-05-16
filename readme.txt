@@ -26,7 +26,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * class = Add a class to the content 'div' container (default is none).
 * code = Wrap the content in a &lt;code&gt;&lt;/code&gt; container (default is false).
 * code_class = Add a class to the 'code' container (default is none).
-* code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a class to the 'code' container (default is none).
+* code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a language class to the 'code' container (default is none).
 * esc_html = Escape HTML characters (default is false).
 * esc_html_pre_code = Escape HTML characters and wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).
 * file = Path to a local file (relative to the wp-content/ folder).
@@ -35,7 +35,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * pre = Wrap the content in a &lt;pre&gt;&lt;/pre&gt; container (default is false).
 * pre_class = Add a class to the 'pre' container (default is none).
 * pre_code = Wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).
-* pre_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a class to the 'pre' container (default is none).
+* pre_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a language class to the 'pre' container (default is none).
 * pre_title = Add a title to the 'pre' container (default is none).
 * url = URL or file URI.
 * utf8 = Encode HTML entities (default is true).
@@ -46,15 +46,21 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
 The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to add an additional custom shortcode name (the default shortcode names are 'wp-file-get-contents' and 'wpfgc').
 
-<pre>define( 'WPFGC_SHORTCODE_NAME', 'include' );</pre>
+<pre><code>
+define( 'WPFGC_SHORTCODE_NAME', 'include' );
+</code></pre>
 
 = Shortcode Examples =
 
 <pre><code>
 &#91;wpfgc url="http://example.com/dir/file.html"&#93;
+
 &#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
+
 &#91;wpfgc url="file://dir/file.html"&#93;
+
 &#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;
+
 &#91;wpfgc file="examples/example-1.php" code_lang="php"&#93;
 </code></pre>
 
