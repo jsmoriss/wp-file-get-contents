@@ -23,18 +23,24 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 
 * body = Keep only the content between &lt;body&gt;&lt;/body&gt; HTML tags (default is true).
 * cache = Number of seconds to cache the contents (defaults is 3600 seconds).
-* class = Wrap the content in the specified div class (default is none).
-* code = Wrap the content in &lt;code&gt;&lt;/code&gt; HTML tags (default is false).
+* class = Add a class to the content 'div' container (default is none).
+* code = Wrap the content in a &lt;code&gt;&lt;/code&gt; container (default is false).
+* code_class = Add a class to the 'code' container (default is none).
+* code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a class to the 'code' container (default is none).
 * esc_html = Escape HTML characters (default is false).
+* esc_html_pre_code = Escape HTML characters and wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).
 * file = Path to a local file (relative to the wp-content/ folder).
-* filter = Apply the specified filter to the content (default is none).
-* more = Add more link on non-singular web pages (default is true).
-* pre = Wrap the content in &lt;pre&gt;&lt;/pre&gt; HTML tags (default is false).
-* pre_code_esc_html = Escape HTML characters and wrap the content in &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; HTML tags (default is false).
+* filter = Apply the named filter to the content (default is none).
+* more = Add a more link on non-singular web pages (default is true).
+* pre = Wrap the content in a &lt;pre&gt;&lt;/pre&gt; container (default is false).
+* pre_class = Add a class to the 'pre' container (default is none).
+* pre_code = Wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).
+* pre_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a class to the 'pre' container (default is none).
+* pre_title = Add a title to the 'pre' container (default is none).
 * url = URL or file URI.
 * utf8 = Encode HTML entities (default is true).
 
-> **Note that all local file paths are relative to the wp-content/ folder** - you cannot include files outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is stripped from file paths to prevent backing out of the wp-content/ folder.
+> **Note that all local file paths are relative to the wp-content/ folder** -- it is not possible to include files outside the wp-content/ folder. For example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
@@ -44,10 +50,13 @@ The WPFGC_SHORTCODE_NAME constant can be defined in your wp-config.php file to a
 
 = Shortcode Examples =
 
-<pre>&#91;wpfgc url="http://example.com/dir/file.html"&#93;
+<pre><code>
+&#91;wpfgc url="http://example.com/dir/file.html"&#93;
 &#91;wpfgc url="http://example.com/counter/" cache="7200"&#93;
 &#91;wpfgc url="file://dir/file.html"&#93;
-&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;</pre>
+&#91;wpfgc file="/dir/file.txt" pre="true" filter="my_custom_filter_name" cache="600"&#93;
+&#91;wpfgc file="examples/example-1.php" code_lang="php"&#93;
+</code></pre>
 
 == Installation ==
 
@@ -73,6 +82,20 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
+**Version 2.7.0-dev.1 (2023/05/16)**
+
+* **New Features**
+	* Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
+* **Improvements**
+	* None.
+* **Bugfixes**
+	* None.
+* **Developer Notes**
+	* None.
+* **Requires At Least**
+	* PHP v7.2.5.
+	* WordPress v5.5.
+
 **Version 2.6.0 (2023/05/13)**
 
 * **New Features**
@@ -89,6 +112,10 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 	* WordPress v5.5.
 
 == Upgrade Notice ==
+
+= 2.7.0-dev.1 =
+
+(2023/05/16) Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
 
 = 2.6.0 =
 
