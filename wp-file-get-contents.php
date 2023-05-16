@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name: JSM's file_get_contents() Shortcode
+ * Plugin Name: JSM file_get_contents() Shortcode
  * Text Domain: wp-file-get-contents
  * Domain Path: /languages
  * Plugin URI: https://surniaulula.com/extend/plugins/wp-file-get-contents/
