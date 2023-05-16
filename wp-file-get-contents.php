@@ -13,7 +13,7 @@
  * Requires PHP: 7.2.5
  * Requires At Least: 5.5
  * Tested Up To: 6.2.0
- * Version: 2.6.0
+ * Version: 2.7.0-dev.1
  *
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -132,11 +132,11 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
 
-				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/\/|\.\.)/', '', $atts[ 'url' ] );
+				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/\/|\.\.\.*)/', '', $atts[ 'url' ] );
 
 			} elseif ( ! empty( $atts[ 'file' ] ) ) {
 
-				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^\/+|\.\.)/', '', $atts[ 'file' ] );
+				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^\/+|\.\.\.*)/', '', $atts[ 'file' ] );
 
 			} else {
 
@@ -145,30 +145,36 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
 			}
 
-			$cache_salt  = __METHOD__ . '_' . $this->get_atts_salt( $atts );
-			$cache_id    = __CLASS__ . '_' . md5( $cache_salt );
-			$cache_exp   = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;
-			$do_class    = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional div container class names.
-			$do_code     = isset( $atts[ 'code' ] ) ? self::get_bool( $atts[ 'code' ] ) : false;
-			$do_body     = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
-			$do_esc_html = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;
-			$do_filter   = isset( $atts[ 'filter' ] ) ? sanitize_text_field( $atts[ 'filter' ] ) : 'wpfgc_content';
-			$do_more     = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
-			$do_pre      = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
-			$do_utf8     = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
+			$cache_salt           = __METHOD__ . '_' . $this->get_atts_salt( $atts );
+			$cache_id             = __CLASS__ . '_' . md5( $cache_salt );
+			$do_body              = isset( $atts[ 'body' ] ) ? self::get_bool( $atts[ 'body' ] ) : true;
+			$do_cache             = isset( $atts[ 'cache' ] ) ? (int) $atts[ 'cache' ] : 3600;
+			$do_class             = empty( $atts[ 'class' ] ) ? '' : esc_attr( $atts[ 'class' ] );		// Optional div container class names.
+			$do_code              = isset( $atts[ 'code' ] ) ? self::get_bool( $atts[ 'code' ] ) : false;
+			$do_code_class        = empty( $atts[ 'code_class' ] ) ? '' : esc_attr( $atts[ 'code_class' ] );
+			$do_code_lang         = empty( $atts[ 'code_lang' ] ) ? '' : esc_attr( $atts[ 'code_lang' ] );
+			$do_esc_html          = isset( $atts[ 'esc_html' ] ) ? self::get_bool( $atts[ 'esc_html' ] ) : false;
+			$do_esc_html_pre_code = isset( $atts[ 'esc_html_pre_code' ] ) ? self::get_bool( $atts[ 'esc_html_pre_code' ] ) : false;
+			$do_esc_html_pre_code = isset( $atts[ 'pre_code_esc_html' ] ) ? self::get_bool( $atts[ 'pre_code_esc_html' ] ) : $do_esc_html_pre_code;
+			$do_filter            = isset( $atts[ 'filter' ] ) ? sanitize_text_field( $atts[ 'filter' ] ) : 'wpfgc_content';
+			$do_more              = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
+			$do_pre               = isset( $atts[ 'pre' ] ) ? self::get_bool( $atts[ 'pre' ] ) : false;
+			$do_pre_class         = empty( $atts[ 'pre_class' ] ) ? '' : esc_attr( $atts[ 'pre_class' ] );
+			$do_pre_code          = isset( $atts[ 'pre_code' ] ) ? self::get_bool( $atts[ 'pre_code' ] ) : false;
+			$do_pre_lang          = empty( $atts[ 'pre_lang' ] ) ? '' : esc_attr( $atts[ 'pre_lang' ] );
+			$do_pre_title         = empty( $atts[ 'pre_title' ] ) ? '' : esc_attr( $atts[ 'pre_title' ] );
+			$do_utf8              = isset( $atts[ 'utf8' ] ) ? self::get_bool( $atts[ 'utf8' ] ) : true;
 
-			if ( isset( $atts[ 'pre_code_esc_html' ] ) && self::get_bool( $atts[ 'pre_code_esc_html' ] ) ) {
-
-				$do_esc_html = true;
-				$do_pre      = true;
-				$do_code     = true;
-			}
+			if ( $do_code_lang )         { $do_esc_html_pre_code = true; $do_code_class = trim( $do_code_class . ' language-' . $do_code_lang ); }
+			if ( $do_pre_lang )          { $do_esc_html_pre_code = true; $do_pre_class = trim( $do_pre_class . ' language-' . $do_pre_lang ); }
+			if ( $do_esc_html_pre_code ) { $do_esc_html = $do_pre_code = true; }
+			if ( $do_pre_code )          { $do_pre = $do_code = true; }
 
 			if ( $this->cache_disabled ) {	// Signal to clear and re-create the cache object.
 
 				delete_transient( $cache_id );
 
-			} elseif ( $cache_exp ) {
+			} elseif ( $do_cache ) {
 
 				$content = get_transient( $cache_id );
 
@@ -209,7 +215,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			 */
 			if ( $do_code ) {
 
-				$content = '<code>' . $content . '</code>';
+				$content = '<code' . ( $do_code_class ? ' class="' . $do_code_class . '"' : '' ) . '>' . $content . '</code>';
 			}
 
 			/*
@@ -217,7 +223,8 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			 */
 			if ( $do_pre ) {
 
-				$content = '<pre>' . $content . '</pre>';
+				$content = '<pre' . ( $do_pre_class ? ' class="' . $do_pre_class . '"' : '' ) .
+					( $do_pre_title ? ' title="' . $do_pre_title . '"' : '' ) . '>' . $content . '</pre>';
 			}
 
 			/*
@@ -235,9 +242,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			/*
 			 * Maybe cache the content (default is 1 hour).
 			 */
-			if ( $cache_exp ) {
+			if ( $do_cache ) {
 
-				set_transient( $cache_id, $content, $cache_exp );	// Save rendered content.
+				set_transient( $cache_id, $content, $do_cache );	// Save rendered content.
 			}
 
 			return $this->format_content( $content, $atts );
@@ -290,7 +297,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		private function format_content( $content, $atts ) {
 
-			$do_class = empty( $atts[ 'class' ] ) ? '' : ' ' . esc_attr( $atts[ 'class' ] );	// Optional div container class names.
+			$do_class = empty( $atts[ 'class' ] ) ? '' : esc_attr( $atts[ 'class' ] );		// Optional div container class names.
 			$do_more  = isset( $atts[ 'more' ] ) ? self::get_bool( $atts[ 'more' ] ) : true;	// Add more link (default is true).
 
 			/*
@@ -316,7 +323,8 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
-			$content = '<div class="wp_file_get_contents wpfgc' . $do_class . '">' . "\n" . $content . '</div><!-- .wp_file_get_contents -->' . "\n";
+			$content = '<div class="wp_file_get_contents wpfgc' . ( $do_class ? ' ' . $do_class : '' ) . '">' . "\n" .
+				$content . '</div><!-- .wp_file_get_contents -->' . "\n";
 
 			return $content;
 		}
