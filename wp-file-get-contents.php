@@ -60,7 +60,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			if ( is_admin() ) {
 
-				add_action( 'save_post', array( $this, 'clear_post_cache' ), 10 );
+				add_action( 'save_post', array( $this, 'clear_post_cache' ), -1000 );
 			}
 
 			$this->check_wpautop();
