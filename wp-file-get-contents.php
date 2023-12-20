@@ -13,7 +13,7 @@
  * Requires PHP: 7.2.34
  * Requires At Least: 5.5
  * Tested Up To: 6.4.2
- * Version: 2.7.0
+ * Version: 3.0.0-dev.1
  *
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -123,20 +123,32 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				$atts = array();
 			}
 
+			$get_url  = false;
+			$get_file = false;
+
 			/*
 			 * Determine the url / file name to retrieve.
 			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
 
-				$do_url = $atts[ 'url' ];
+				/*
+				 * See https://developer.wordpress.org/reference/functions/wp_http_validate_url/
+				 */
+				$get_url = wp_http_validate_url( $atts[ 'url' ] );
 
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
 
-				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/\/|\.\.\.*)/', '', $atts[ 'url' ] );
+				/*
+				 * Remove URL scheme, two or more dots.
+				 */
+				$get_file = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/+|\.\.+)/', '', $atts[ 'url' ] );
 
 			} elseif ( ! empty( $atts[ 'file' ] ) ) {
 
-				$do_url = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^\/+|\.\.\.*)/', '', $atts[ 'file' ] );
+				/*
+				 * Remove URL scheme, leading slash, two or more dots.
+				 */
+				$get_file = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^[a-z]*:\/+|^\/+|\.\.+)/', '', $atts[ 'file' ] );
 
 			} else {
 
@@ -187,7 +199,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
-			$content = file_get_contents( $do_url );
+			$content = file_get_contents( $get_url ? $get_url : $get_file );
 
 			/*
 			 * Maybe keep only <body></body> content (default is true).
