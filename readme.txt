@@ -88,14 +88,15 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 3.0.0-dev.1 (2023/12/20)**
+**Version 2.7.1-dev.1 (2023/12/20)**
 
 * **New Features**
 	* None.
 * **Improvements**
 	* None.
 * **Bugfixes**
-	* None.
+	* Added `sanitize_text_field()` sanitation for file path value.
+	* Added `wp_http_validate_url()` sanitation for URL value (props Erwan Le Rousseau @ WPScan).
 * **Developer Notes**
 	* None.
 * **Requires At Least**
@@ -118,7 +119,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 == Upgrade Notice ==
 
-= 3.0.0-dev.1 =
+= 2.7.1-dev.1 =
 
 (2023/12/20) None.
 
