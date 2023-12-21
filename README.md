@@ -27,7 +27,7 @@
 <li>code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a language class to the 'code' container (default is none).</li>
 <li>esc_html = Escape HTML characters (default is false).</li>
 <li>esc_html_pre_code = Escape HTML characters and wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).</li>
-<li>file = Path to a local file (relative to the wp-content/ folder).</li>
+<li>file = Path to a local file (<strong>relative</strong> to the wp-content/ folder).</li>
 <li>filter = Apply the named filter to the content (default is none).</li>
 <li>more = Add a more link on non-singular web pages (default is true).</li>
 <li>pre = Wrap the content in a &lt;pre&gt;&lt;/pre&gt; container (default is false).</li>
@@ -40,7 +40,7 @@
 </ul>
 
 <blockquote>
-  <p><strong>Note that all file paths (not URLs) are relative to the wp-content/ folder</strong> -- for security reasons, it is not possible to include files outside the wp-content/ folder. As an example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are both read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.</p>
+  <p>Note that all file paths (not URLs) are <strong>relative</strong> to the wp-content/ folder. For security reasons, it is not possible to include files outside the wp-content/ folder. As an example, the shortcode attributes <code>url="file://dir/file.html"</code> and <code>file="/dir/file.html"</code> are both read as wordpress/wp-contents/dir/file.html. The <code>..</code> folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.</p>
 </blockquote>
 
 <h4>Shortcode Name</h4>

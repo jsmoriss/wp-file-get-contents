@@ -29,7 +29,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * code_lang = Escape HTML characters, wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container, and add a language class to the 'code' container (default is none).
 * esc_html = Escape HTML characters (default is false).
 * esc_html_pre_code = Escape HTML characters and wrap the content in a &lt;pre&gt;&lt;code&gt;&lt;/code&gt;&lt;/pre&gt; container (default is false).
-* file = Path to a local file (relative to the wp-content/ folder).
+* file = Path to a local file (**relative** to the wp-content/ folder).
 * filter = Apply the named filter to the content (default is none).
 * more = Add a more link on non-singular web pages (default is true).
 * pre = Wrap the content in a &lt;pre&gt;&lt;/pre&gt; container (default is false).
@@ -40,7 +40,7 @@ A safe and reliable WordPress shortcode for PHP's file_get_contents() function.
 * url = URL or file URI.
 * utf8 = Encode HTML entities (default is true).
 
-> **Note that all file paths (not URLs) are relative to the wp-content/ folder** -- for security reasons, it is not possible to include files outside the wp-content/ folder. As an example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
+> Note that all file paths (not URLs) are **relative** to the wp-content/ folder. For security reasons, it is not possible to include files outside the wp-content/ folder. As an example, the shortcode attributes `url="file://dir/file.html"` and `file="/dir/file.html"` are both read as wordpress/wp-contents/dir/file.html. The `..` folder name is also stripped from file paths to prevent backing out of the wp-content/ folder.
 
 = Shortcode Name =
 
