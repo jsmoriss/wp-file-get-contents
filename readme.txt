@@ -88,7 +88,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 <h3>Changelog / Release Notes</h3>
 
-**Version 2.7.1-dev.1 (2023/12/20)**
+**Version 2.7.1-rc.1 (2023/12/20)**
 
 * **New Features**
 	* None.
@@ -119,7 +119,7 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 
 == Upgrade Notice ==
 
-= 2.7.1-dev.1 =
+= 2.7.1-rc.1 =
 
 (2023/12/20) None.
 
