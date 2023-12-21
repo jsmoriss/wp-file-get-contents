@@ -13,7 +13,7 @@
  * Requires PHP: 7.2.34
  * Requires At Least: 5.5
  * Tested Up To: 6.4.2
- * Version: 3.0.0-dev.1
+ * Version: 2.7.1-dev.1
  *
  * Version Numbering: {major}.{minor}.{bugfix}[-{stage}.{level}]
  *
@@ -118,16 +118,15 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 		public function do_shortcode( $atts = array(), $content = null, $tag = '' ) {
 
-			if ( ! is_array( $atts ) ) {	// Empty string if no shortcode attributes.
-
-				$atts = array();
-			}
-
-			$get_url  = false;
-			$get_file = false;
+			/*
+			 * $atts is an empty string if there are no shortcode attributes.
+			 */
+			$atts     = is_array( $atts ) ? $atts : array();
+			$get_url  = '';
+			$get_file = '';
 
 			/*
-			 * Determine the url / file name to retrieve.
+			 * Sanitize the URL or relative file path to retrieve.
 			 */
 			if ( ! empty( $atts[ 'url' ] ) && preg_match( '/^https?:\/\//', $atts[ 'url' ] ) ) {
 
@@ -139,22 +138,40 @@ if ( ! class_exists( 'WPFGC' ) ) {
 			} elseif ( ! empty( $atts[ 'url' ] ) && preg_match( '/^file:\/\//', $atts[ 'url' ] ) ) {
 
 				/*
-				 * Remove URL scheme, two or more dots.
+				 * Create a relative file path.
+				 *
+				 * Remove the URL scheme, two or more dots.
+				 *
+				 * See https://developer.wordpress.org/reference/functions/sanitize_text_field/
 				 */
-				$get_file = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^file:\/+|\.\.+)/', '', $atts[ 'url' ] );
+				$get_file = sanitize_text_field( preg_replace( '/(^file:\/+|\.\.+)/', '', $atts[ 'url' ] ) );
 
 			} elseif ( ! empty( $atts[ 'file' ] ) ) {
 
 				/*
-				 * Remove URL scheme, leading slash, two or more dots.
+				 * Create a relative file path.
+				 *
+				 * Remove the URL scheme, leading slash, two or more dots.
+				 *
+				 * See https://developer.wordpress.org/reference/functions/sanitize_text_field/
 				 */
-				$get_file = trailingslashit( WP_CONTENT_DIR ) . preg_replace( '/(^[a-z]*:\/+|^\/+|\.\.+)/', '', $atts[ 'file' ] );
+				$get_file = sanitize_text_field( preg_replace( '/(^[a-z]*:\/+|^\/+|\.\.+)/', '', $atts[ 'file' ] ) );
+			}
+
+			if ( ! empty( $get_url ) ) {
+
+				// Nothing to do.
+
+			} elseif ( ! empty( $get_file ) ) {
+
+				$get_file = trailingslashit( WP_CONTENT_DIR ) . $get_file;	// Complete the relative file path.
 
 			} else {
 
-				$error_msg = sprintf( __( '%1$s or %2$s shortcode attribute missing.', 'wp-file-get-contents' ), '<code>url</code>', '<code>file</code>' );
+				$error_msg = sprintf( __( '%1$s or %2$s shortcode attribute missing or invalid.', 'wp-file-get-contents' ),
+					'<code>url</code>', '<code>file</code>' );
 
-				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';
+				return '<p><strong>' . __CLASS__ . ': ' . $error_msg . '</strong></p>';	// Stop here.
 			}
 
 			/*
@@ -199,6 +216,9 @@ if ( ! class_exists( 'WPFGC' ) ) {
 				}
 			}
 
+			/*
+			 * Get the sanitized URL or file path content.
+			 */
 			$content = file_get_contents( $get_url ? $get_url : $get_file );
 
 			/*
