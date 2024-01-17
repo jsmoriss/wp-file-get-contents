@@ -365,7 +365,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 		}
 
 		/*
-		 * Converts string to boolean.
+		 * Maybe convert string to boolean.
 		 */
 		private static function get_bool( $mixed ) {
 
