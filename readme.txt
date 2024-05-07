@@ -6,7 +6,7 @@ Domain Path: /languages
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.txt
 Assets URI: https://jsmoriss.github.io/wp-file-get-contents/assets/
-Tags: file_get_contents, shortcode, include, file, url, body, content
+Tags: file_get_contents, shortcode, include, file, url
 Contributors: jsmoriss
 Requires PHP: 7.2.34
 Requires At Least: 5.8
