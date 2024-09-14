@@ -8,8 +8,8 @@ License URI: https://www.gnu.org/licenses/gpl.txt
 Assets URI: https://jsmoriss.github.io/wp-file-get-contents/assets/
 Tags: file_get_contents, shortcode, include, file, url
 Contributors: jsmoriss
-Requires PHP: 7.2.34
-Requires At Least: 5.8
+Requires PHP: 7.4.33
+Requires At Least: 5.9
 Tested Up To: 6.6.2
 Stable Tag: 2.7.1
 
@@ -100,30 +100,12 @@ Version components: `{major}.{minor}.{bugfix}[-{stage}.{level}]`
 * **Developer Notes**
 	* None.
 * **Requires At Least**
-	* PHP v7.2.34.
-	* WordPress v5.8.
-
-**Version 2.7.0 (2023/05/16)**
-
-* **New Features**
-	* Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
-* **Improvements**
-	* None.
-* **Bugfixes**
-	* None.
-* **Developer Notes**
-	* None.
-* **Requires At Least**
-	* PHP v7.2.34.
-	* WordPress v5.5.
+	* PHP v7.4.33.
+	* WordPress v5.9.
 
 == Upgrade Notice ==
 
 = 2.7.1 =
 
-(2023/12/20) None.
-
-= 2.7.0 =
-
-(2023/05/16) Added shortcode attribute: code_class, code_lang, esc_html_pre_code, pre_class, pre_code, pre_lang, pre_title.
+(2023/12/20) Added sanitation for file path and URL values.
 
