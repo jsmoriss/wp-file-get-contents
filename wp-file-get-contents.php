@@ -104,7 +104,7 @@ if ( ! class_exists( 'WPFGC' ) ) {
 
 			foreach ( $this->shortcode_names as $name ) {
 
-        			add_shortcode( $name, array( $this, 'do_shortcode' ) );
+				add_shortcode( $name, array( $this, 'do_shortcode' ) );
 			}
 		}
 
