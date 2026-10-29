@@ -3,8 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JSM file_get_contents() Shortcode 2.7.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-file-get-"
-"contents\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-file-get-contents\n"
 "POT-Creation-Date: 2026-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,7 +15,6 @@ msgstr ""
 #: wp-file-get-contents.php:171
 msgid "%1$s or %2$s shortcode attribute missing or invalid."
 msgstr ""
-
 #. Plugin Name of the plugin/theme
 msgid "JSM file_get_contents() Shortcode"
 msgstr ""
